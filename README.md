@@ -1,5 +1,5 @@
 # Todo API
-###### **This API is made based on: nodejs and express web framework.**
+###### **It is made based on: nodejs and express web framework.**
 
 #### The API documentation can be found at */api-doc* endpoint. 
 
@@ -16,4 +16,3 @@
 - list all tasks
 - list tasks per user
 
-his
