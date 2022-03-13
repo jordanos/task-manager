@@ -1,11 +1,11 @@
 # Todo API
-**it is an API based on nodejs and express web framework.**
+#### **it is an API based on nodejs and express web framework.**
 
-### The API documentation can be found at */api-doc* endpoint. 
+#### The API documentation can be found at */api-doc* endpoint. 
 
 ## This API can do the following things.
-### Users
-- can register
+### Users can:
+- register
 - login
 - read, list, add, edit, delete tasks
 - can only read and manage their own tasks
