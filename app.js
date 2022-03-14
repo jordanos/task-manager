@@ -9,7 +9,7 @@ const swaggerUi = require("swagger-ui-express");
 const errorHandler = require("./middlewares/errorHandler");
 
 // Load Config File
-dotenv.config({ path: "./config/config.env" });
+dotenv.config({ path: "./config/.env" });
 
 // Connect To Database
 db()
