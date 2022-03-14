@@ -51,12 +51,12 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 // Load Routes
 const usersRoute = require("./routes/users");
 const tasksRoute = require("./routes/tasks");
-// const authRoute = require("./routes/auth");
+const authRoute = require("./routes/auth");
 
 // Use Routes
 app.use("/api/v1/users", usersRoute);
 app.use("/api/v1/tasks", tasksRoute);
-// app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/auth", authRoute);
 
 // Error handler middleware
 app.use(errorHandler);

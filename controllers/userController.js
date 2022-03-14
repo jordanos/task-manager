@@ -6,6 +6,7 @@ const {
   DeleteOne,
   UpdateOne,
 } = require("./templates");
+const { validateUserInput } = require("./validations");
 
 exports.getUsers = (req, res, next) => {
   const getAll = new GetAll(req, res, next, User, "user");
@@ -13,8 +14,9 @@ exports.getUsers = (req, res, next) => {
 };
 
 exports.createUser = (req, res, next) => {
-  const ceateOne = new CreateOne(req, res, next, User, "user");
-  ceateOne.execute();
+  const createOne = new CreateOne(req, res, next, User, "user");
+  createOne.validate = validateUserInput;
+  createOne.execute();
 };
 
 exports.getUser = (req, res, next) => {
@@ -24,6 +26,7 @@ exports.getUser = (req, res, next) => {
 
 exports.updateUser = (req, res, next) => {
   const updateOne = new UpdateOne(req, res, next, User, "user");
+  updateOne.validate = validateUserInput;
   updateOne.execute();
 };
 

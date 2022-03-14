@@ -18,36 +18,51 @@ const router = express.Router();
  *    Task:
  *      type: object
  *      required:
- *        - name
- *        - email
- *        - password
+ *        - title
+ *        - desc
+ *        - start
+ *        - end
  *      properties:
  *        id:
  *          type: String
- *          description: The auto-generated id of the user.
- *        name:
+ *          description: The auto-generated id of the task.
+ *        title:
  *          type: string
- *          description: name of the user.
- *        email:
+ *          description: title of the task.
+ *        desc:
  *          type: string
- *          description: email of user.
- *        password:
+ *          description: description of the task.
+ *        start:
  *          type: string
- *          description: password of user.
+ *          format: date
+ *          description: The start time of the task.
+ *        end:
+ *          type: string
+ *          format: date
+ *          description: The end time of the task.
+ *        isDone:
+ *          type: boolean
+ *          description: Status of task completion.
  *        createdAt:
  *          type: string
  *          format: date
  *          description: The date of the record creation.
+ *        owner:
+ *          type: string
+ *          description: Task owner/user id.
  *      example:
- *      name: Abebe
- *      email: abebe@xyz.com
+ *      title: Task
+ *      desc: new task for today
+ *      start: 12/12/22
+ *      end: 12/12/22
+ *      owner: 622de5fed3f42ebf99d1b5de
  */
 
 /**
  *@swagger
  *tags:
  *  name: Tasks
- *  description: API to manage users.
+ *  description: API to manage tasks.
  */
 
 router

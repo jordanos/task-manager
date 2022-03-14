@@ -6,6 +6,7 @@ const {
   DeleteOne,
   UpdateOne,
 } = require("./templates");
+const { validateTaskInput } = require("./validations");
 
 exports.getTasks = (req, res, next) => {
   const getAll = new GetAll(req, res, next, Task, "task");
@@ -13,8 +14,9 @@ exports.getTasks = (req, res, next) => {
 };
 
 exports.createTask = (req, res, next) => {
-  const ceateOne = new CreateOne(req, res, next, Task, "task");
-  ceateOne.execute();
+  const createOne = new CreateOne(req, res, next, Task, "task");
+  createOne.validate = validateTaskInput;
+  createOne.execute();
 };
 
 exports.getTask = (req, res, next) => {
@@ -24,6 +26,7 @@ exports.getTask = (req, res, next) => {
 
 exports.updateTask = (req, res, next) => {
   const updateOne = new UpdateOne(req, res, next, Task, "task");
+  updateOne.validate = validateTaskInput;
   updateOne.execute();
 };
 
