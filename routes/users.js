@@ -7,6 +7,7 @@ const {
   deleteUser,
   //   deleteUser,
 } = require("../controllers/userController");
+const { loginReq } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
@@ -144,7 +145,7 @@ router
    *             schema:
    *               $ref: '#/components/schemas/User'
    */
-  .put(updateUser)
+  .put(loginReq, updateUser)
   /**
    *@swagger
    *path:
@@ -167,6 +168,6 @@ router
    *             schema:
    *               $ref: '#/components/schemas/User'
    */
-  .delete(deleteUser);
+  .delete(loginReq, deleteUser);
 
 module.exports = router;

@@ -1,7 +1,13 @@
 const request = require("supertest");
 const app = require("../app");
 const User = require("../models/User");
+
 const { seedUser1, seedUser2 } = require("../_seedData/testData");
+
+const jwt = require("jsonwebtoken");
+const token = jwt.sign({ id: seedUser1._id }, process.env.SECRET_KEY, {
+  expiresIn: "9999d",
+});
 
 userSchema = {
   name: expect.any(String),
@@ -100,6 +106,7 @@ describe("Users API endpoint", () => {
   it("PUT /users/id -> edits a user", () => {
     return request(app)
       .put(`/api/v1/users/${seedUser1._id}`)
+      .set("Authorization", token)
       .send({ ...seedUser1, name: "abebu" })
       .expect("Content-Type", /json/)
       .expect(200)
@@ -111,6 +118,7 @@ describe("Users API endpoint", () => {
   it("DELETE /users/id -> deletes a user", () => {
     return request(app)
       .delete(`/api/v1/users/${seedUser1._id}`)
+      .set("Authorization", token)
       .expect("Content-Type", /json/)
       .expect(200)
       .then((response) => {

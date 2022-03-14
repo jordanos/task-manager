@@ -28,22 +28,7 @@ app.use(cors());
 
 // api automatic documentaion
 // Extended: https://swagger.io/specification/#infoObject
-const swaggerOptions = {
-  swaggerDefinition: {
-    openapi: "3.0.0",
-    info: {
-      version: "1.0.0",
-      title: "Todo API",
-      description: "Todo API documentaion.",
-      contact: {
-        name: "Jordan",
-        email: "jordanoswork2021@gmail.com",
-      },
-      servers: ["http://localhost:5000"],
-    },
-  },
-  apis: ["./routes/*.js"],
-};
+const { swaggerOptions } = require("./docs/swagger");
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
@@ -52,11 +37,14 @@ app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
 const usersRoute = require("./routes/users");
 const tasksRoute = require("./routes/tasks");
 const authRoute = require("./routes/auth");
+const adminsRoute = require("./routes/admins");
+const { adminReq } = require("./middlewares/authMiddleware");
 
 // Use Routes
 app.use("/api/v1/users", usersRoute);
 app.use("/api/v1/tasks", tasksRoute);
 app.use("/api/v1/auth", authRoute);
+app.use("/api/v1/admins", adminReq, adminsRoute);
 
 // Error handler middleware
 app.use(errorHandler);

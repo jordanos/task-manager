@@ -7,6 +7,10 @@ const userSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
+const adminSchema = Joi.object({
+  owner: Joi.string().required(),
+});
+
 const taskSchema = Joi.object({
   title: Joi.string().required(),
   desc: Joi.string().required(),
@@ -31,6 +35,13 @@ exports.validateUserInput = (req) => {
 
 exports.validateTaskInput = (req) => {
   const { error, value } = taskSchema.validate(req.body, options);
+  if (error) {
+    throw new CustomError(error.message, 400);
+  }
+};
+
+exports.validateAdminInput = (req) => {
+  const { error, value } = adminSchema.validate(req.body, options);
   if (error) {
     throw new CustomError(error.message, 400);
   }

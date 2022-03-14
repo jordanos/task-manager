@@ -7,14 +7,30 @@ class BaseTemplate {
     this.next = next;
     this.model = model;
     this.modelName = modelName;
+    // if filter is set to some value, it will be used in sub classes
+    this.filter = null;
   }
 
+  // do database stuff and save the result in this.doc, and must get implemented in sub classes
+  async doMongo() {
+    throw new Error(
+      "No function has been implemented to perform the doMongo()"
+    );
+  }
+
+  // perform the request.. this must get implemented in sub classes
   performReq() {
-    throw new Error("No function has been implemented to perform the request");
+    throw new Error("No function has been implemented to performReq()");
   }
 
-  execute() {
-    this.performReq();
+  // It gets called by controllers torun the request
+  async execute() {
+    try {
+      await this.doMongo();
+      this.performReq();
+    } catch (e) {
+      return this.next(e);
+    }
   }
 }
 
@@ -23,15 +39,15 @@ exports.GetAll = class GetAll extends BaseTemplate {
     super(req, res, next, model, modelName);
   }
 
-  async performReq() {
-    try {
-      const doc = await this.model.find();
-      this.res.status(200).json({
-        data: doc,
-      });
-    } catch (e) {
-      this.next(new CustomError(e.message, 500));
-    }
+  async doMongo() {
+    if (this.filter) this.doc = await this.model.find(this.filter);
+    else this.doc = await this.model.find();
+  }
+
+  performReq() {
+    this.res.status(200).json({
+      data: this.doc,
+    });
   }
 };
 
@@ -40,19 +56,17 @@ exports.CreateOne = class CreateOne extends BaseTemplate {
     super(req, res, next, model, modelName);
   }
 
-  async performReq() {
-    try {
-      // validate user data
-      this.validate(this.req);
+  async doMongo() {
+    // validate user data
+    this.validate(this.req);
 
-      const doc = await this.model.create(this.req.body);
-      this.res.status(201).json({
-        data: doc,
-      });
-    } catch (e) {
-      if (e instanceof CustomError) return this.next(e);
-      this.next(new CustomError(e.message, 500));
-    }
+    this.doc = await this.model.create(this.req.body);
+  }
+
+  performReq() {
+    this.res.status(201).json({
+      data: this.doc,
+    });
   }
 };
 
@@ -61,21 +75,18 @@ exports.GetOne = class GetOne extends BaseTemplate {
     super(req, res, next, model, modelName);
   }
 
-  async performReq() {
-    try {
-      const id = this.req.params.id;
-      const doc = await this.model.findById(id);
-      // throw exception if doc is null/not found
-      if (!doc)
-        return this.next(
-          new CustomError(`${this.modelName} id ${id} not found`, 404)
-        );
-      this.res.status(200).json({
-        data: doc,
-      });
-    } catch (e) {
-      this.next(new CustomError(e.message, 500));
-    }
+  async doMongo() {
+    const id = this.req.params.id;
+    this.doc = await this.model.findById(id);
+  }
+
+  performReq() {
+    // throw exception if doc is null/not found
+    if (!this.doc)
+      throw new CustomError(`${this.modelName} id ${id} not found`, 404);
+    this.res.status(200).json({
+      data: this.doc,
+    });
   }
 };
 
@@ -84,29 +95,26 @@ exports.UpdateOne = class UpdateOne extends BaseTemplate {
     super(req, res, next, model, modelName);
   }
 
-  async performReq() {
-    try {
-      // validate user data
-      this.validate(this.req);
+  async doMongo() {
+    // validate user data
+    this.validate(this.req);
 
-      const id = this.req.params.id;
-      const filter = { _id: id };
-      const update = this.req.body;
-      const doc = await this.model.findOneAndUpdate(filter, update, {
-        new: true,
-      });
-      // throw exception if doc is null/not found
-      if (!doc)
-        return this.next(
-          new CustomError(`${this.modelName} id ${id} not found`, 404)
-        );
-      this.res.status(200).json({
-        data: doc,
-      });
-    } catch (e) {
-      if (e instanceof CustomError) return this.next(e);
-      this.next(new CustomError(e.message, 500));
-    }
+    const id = this.req.params.id;
+    this.filter = { _id: id };
+    const update = this.req.body;
+    this.doc = await this.model.findOneAndUpdate(this.filter, update, {
+      new: true,
+    });
+  }
+
+  performReq() {
+    // throw exception if doc is null/not found
+    if (!this.doc)
+      throw new CustomError(`${this.modelName} id ${id} not found`, 404);
+
+    this.res.status(200).json({
+      data: this.doc,
+    });
   }
 };
 
@@ -115,16 +123,15 @@ exports.DeleteOne = class DeleteOne extends BaseTemplate {
     super(req, res, next, model, modelName);
   }
 
-  async performReq() {
-    try {
-      const id = this.req.params.id;
-      const filter = { _id: id };
-      const doc = await this.model.deleteOne(filter);
-      this.res.status(200).json({
-        data: doc,
-      });
-    } catch (e) {
-      this.next(new CustomError(e.message, 500));
-    }
+  async doMongo() {
+    const id = this.req.params.id;
+    this.filter = { _id: id };
+    this.doc = await this.model.deleteOne(this.filter);
+  }
+
+  performReq() {
+    this.res.status(200).json({
+      data: this.doc,
+    });
   }
 };

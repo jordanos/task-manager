@@ -7,6 +7,7 @@ const {
   deleteTask,
   //   deleteUser,
 } = require("../controllers/taskController");
+const { loginReq } = require("../middlewares/authMiddleware");
 
 const router = express.Router();
 
@@ -82,7 +83,7 @@ router
    *             schema:
    *               $ref: '#/components/schemas/Task'
    */
-  .get(getTasks)
+  .get(loginReq, getTasks)
   /**
    *@swagger
    *path:
@@ -104,7 +105,7 @@ router
    *             schema:
    *               $ref: '#/components/schemas/Task'
    */
-  .post(createTask);
+  .post(loginReq, createTask);
 
 router
   .route("/:id")
@@ -130,7 +131,7 @@ router
    *             schema:
    *               $ref: '#/components/schemas/Task'
    */
-  .get(getTask)
+  .get(loginReq, getTask)
   /**
    *@swagger
    *path:
@@ -159,7 +160,7 @@ router
    *             schema:
    *               $ref: '#/components/schemas/Task'
    */
-  .put(updateTask)
+  .put(loginReq, updateTask)
   /**
    *@swagger
    *path:
@@ -182,6 +183,6 @@ router
    *             schema:
    *               $ref: '#/components/schemas/Task'
    */
-  .delete(deleteTask);
+  .delete(loginReq, deleteTask);
 
 module.exports = router;

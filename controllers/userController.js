@@ -1,4 +1,6 @@
 const User = require("../models/User");
+const CustomError = require("../utils/CustomError");
+const { authorizeUser } = require("./authorization");
 const {
   GetAll,
   CreateOne,
@@ -6,7 +8,7 @@ const {
   DeleteOne,
   UpdateOne,
 } = require("./templates");
-const { validateUserInput } = require("./validations");
+const { validateUserInput } = require("./validators");
 
 exports.getUsers = (req, res, next) => {
   const getAll = new GetAll(req, res, next, User, "user");
@@ -15,7 +17,9 @@ exports.getUsers = (req, res, next) => {
 
 exports.createUser = (req, res, next) => {
   const createOne = new CreateOne(req, res, next, User, "user");
+  // setup a vallidaion function otherwise an error will be thrown
   createOne.validate = validateUserInput;
+
   createOne.execute();
 };
 
@@ -25,12 +29,20 @@ exports.getUser = (req, res, next) => {
 };
 
 exports.updateUser = (req, res, next) => {
+  // authorize users
+  authorizeUser(req);
+
   const updateOne = new UpdateOne(req, res, next, User, "user");
+  // setup a vallidaion function otherwise an error will be thrown
   updateOne.validate = validateUserInput;
+
   updateOne.execute();
 };
 
 exports.deleteUser = (req, res, next) => {
+  // authorize users
+  authorizeUser(req);
+
   const deleteOne = new DeleteOne(req, res, next, User, "user");
   deleteOne.execute();
 };
