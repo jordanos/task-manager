@@ -21,4 +21,5 @@
 ###### If you are using postman or other api testing tools don't forget to add your token in the header section -> *Authorization:* **your token**
 ###### If you're using the documentation please use the authorize button found on the header and add your token.
 
-### **I'll be maintaining this repo. pull requests are appreciated and if you have any issues feel free to raise them. Thanks**
+
+### **I'll be maintaining this repo. pull requests are appreciated and if you have any issues feel free to raise them. Thanks!**
