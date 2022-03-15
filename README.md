@@ -19,5 +19,6 @@
 
 ###### Except creating users most of the api routes needs authentication. Auth token can be obtained by logging in.
 ###### If you are using postman or other api testing tools don't forget to add your token in the header section -> *Authorization:* **your token**
-###### To authenticate users/add token on the documentation please use the authorize button found on the header and add your token.
+###### If you're using the documentation please use the authorize button found on the header and add your token.
 
+### **I'll be maintaining this repo. pull requests are appreciated and if you have any issues feel free to raise them. Thanks**
