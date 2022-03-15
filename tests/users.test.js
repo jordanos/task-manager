@@ -14,7 +14,10 @@ const { userSchema } = require("./schemas");
 // /users integration test
 describe("Users API endpoint", () => {
   beforeAll(async () => {
-    await User.create(seedUser1);
+    
+      await User.create(seedUser1);
+    }
+   
   });
   afterAll(async () => {
     await User.deleteOne({ _id: seedUser1._id });

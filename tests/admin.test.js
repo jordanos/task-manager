@@ -14,17 +14,25 @@ const token = jwt.sign({ id: seedUser1._id }, process.env.SECRET_KEY, {
 // admins integration test
 describe("Admins API endpoint", () => {
   beforeAll(async () => {
-    await User.create(seedUser1);
-    await User.create(seedUser2);
-    await Admin.create({ owner: seedUser1._id });
-    await Task.create(seedTask1);
+    try {
+      await User.create(seedUser1);
+      await User.create(seedUser2);
+      await Admin.create({ owner: seedUser1._id });
+      await Task.create(seedTask1);
+    } catch (e) {
+      console.log(e);
+    }
   });
   afterAll(async () => {
-    await User.deleteOne({ _id: seedUser1._id });
-    await Admin.deleteOne({ owner: seedUser1._id });
-    await User.deleteOne({ _id: seedUser2._id });
-    await Admin.deleteOne({ owner: seedUser2._id });
-    await Task.deleteOne({ _id: seedTask1._id });
+    try {
+      await User.deleteOne({ _id: seedUser1._id });
+      await Admin.deleteOne({ owner: seedUser1._id });
+      await User.deleteOne({ _id: seedUser2._id });
+      await Admin.deleteOne({ owner: seedUser2._id });
+      await Task.deleteOne({ _id: seedTask1._id });
+    } catch (e) {
+      console.log(e);
+    }
   });
 
   it("GET /admins -> list of admins", () => {

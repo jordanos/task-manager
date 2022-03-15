@@ -53,11 +53,11 @@ const router = express.Router();
  *          type: string
  *          description: Task owner/user id.
  *      example:
- *      title: Task
- *      desc: new task for today
- *      start: 12/12/22
- *      end: 12/12/22
- *      owner: 622de5fed3f42ebf99d1b5de
+ *        title: Task
+ *        desc: new task for today
+ *        start: 12/12/22
+ *        end: 12/12/22
+ *        owner: 622de5fed3f42ebf99d1b5de
  */
 
 /**

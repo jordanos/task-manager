@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "A rest api for a todo app.",
   "main": "app.js",
+  "jest": {
+    "verbose": true,
+    "testTimeout": 20000
+  },
   "scripts": {
     "start": "node ./bin/www",
     "dev": "nodemon ./bin/www",

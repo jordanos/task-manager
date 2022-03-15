@@ -30,10 +30,10 @@ exports.swaggerOptions = {
     },
     components: {
       securitySchemes: {
-        JWT: {
-          description: "",
+        bearerAuth: {
           type: "apiKey",
-          name: "Authorization",
+          name: "authorization",
+          scheme: "bearer",
           in: "header",
         },
       },

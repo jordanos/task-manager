@@ -19,8 +19,8 @@ const { login } = require("../controllers/authController");
  *          type: string
  *          description: password of user.
  *      example:
- *      email: abebe@xyz.com
- *      password: 123456
+ *          email: abebe@xyz.com
+ *          password: 123456
  */
 
 /**

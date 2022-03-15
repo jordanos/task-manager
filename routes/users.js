@@ -41,8 +41,8 @@ const router = express.Router();
  *          format: date
  *          description: The date of the record creation.
  *      example:
- *      name: Abebe
- *      email: abebe@xyz.com
+ *        name: Abebe
+ *        email: abebe@xyz.com
  */
 
 /**
