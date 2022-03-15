@@ -26,6 +26,11 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use(morgan("dev"));
 app.use(cors());
 
+// index page
+app.get("/", function (req, res) {
+  res.sendFile(path.join(__dirname, "/public/index.html"));
+});
+
 // api automatic documentaion
 // Extended: https://swagger.io/specification/#infoObject
 const { swaggerOptions, options } = require("./docs/swagger");
