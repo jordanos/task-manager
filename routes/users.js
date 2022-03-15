@@ -8,6 +8,7 @@ const {
   //   deleteUser,
 } = require("../controllers/userController");
 const { loginReq } = require("../middlewares/authMiddleware");
+const { authorizeUser } = require("../middlewares/authorizationMiddleware");
 
 const router = express.Router();
 
@@ -145,7 +146,7 @@ router
    *             schema:
    *               $ref: '#/components/schemas/User'
    */
-  .put(loginReq, updateUser)
+  .put(loginReq, authorizeUser, updateUser)
   /**
    *@swagger
    *path:
@@ -168,6 +169,6 @@ router
    *             schema:
    *               $ref: '#/components/schemas/User'
    */
-  .delete(loginReq, deleteUser);
+  .delete(loginReq, authorizeUser, deleteUser);
 
 module.exports = router;

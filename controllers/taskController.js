@@ -1,5 +1,5 @@
 const Task = require("../models/Task");
-const { authorizeTask } = require("./authorization");
+const { authorizeTask } = require("../middlewares/authorizationMiddleware");
 const {
   GetAll,
   CreateOne,
@@ -7,7 +7,7 @@ const {
   DeleteOne,
   UpdateOne,
 } = require("./templates");
-const { validateTaskInput } = require("./validators");
+const { validateTaskInput } = require("../utils/validators");
 
 exports.getTasks = (req, res, next) => {
   const getAll = new GetAll(req, res, next, Task, "task");
@@ -25,32 +25,17 @@ exports.createTask = (req, res, next) => {
 };
 
 exports.getTask = async (req, res, next) => {
-  try {
-    await authorizeTask(req);
-    const getOne = new GetOne(req, res, next, Task, "task");
-    getOne.execute();
-  } catch (e) {
-    next(e);
-  }
+  const getOne = new GetOne(req, res, next, Task, "task");
+  getOne.execute();
 };
 
 exports.updateTask = async (req, res, next) => {
-  try {
-    await authorizeTask(req);
-    const updateOne = new UpdateOne(req, res, next, Task, "task");
-    updateOne.validate = validateTaskInput;
-    updateOne.execute();
-  } catch (e) {
-    next(e);
-  }
+  const updateOne = new UpdateOne(req, res, next, Task, "task");
+  updateOne.validate = validateTaskInput;
+  updateOne.execute();
 };
 
 exports.deleteTask = async (req, res, next) => {
-  try {
-    await authorizeTask(req);
-    const deleteOne = new DeleteOne(req, res, next, Task, "task");
-    deleteOne.execute();
-  } catch (e) {
-    next(e);
-  }
+  const deleteOne = new DeleteOne(req, res, next, Task, "task");
+  deleteOne.execute();
 };

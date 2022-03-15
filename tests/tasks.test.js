@@ -9,15 +9,7 @@ const token = jwt.sign({ id: seedUser1._id }, process.env.SECRET_KEY, {
   expiresIn: "9999d",
 });
 
-taskSchema = {
-  title: expect.any(String),
-  desc: expect.any(String),
-  start: expect.any(String),
-  end: expect.any(String),
-  createdAt: expect.any(String),
-  isDone: expect.any(Boolean),
-  owner: expect.any(String),
-};
+const { taskSchema } = require("./schemas");
 
 // tasks integration test
 describe("Tasks API endpoint", () => {
@@ -91,7 +83,7 @@ describe("Tasks API endpoint", () => {
       });
   });
 
-  it("GET /tasks/id -> gets a specific task", () => {
+  it("GET /tasks/:id -> gets a specific task", () => {
     return request(app)
       .get(`/api/v1/tasks/${seedTask1._id}`)
       .set("Authorization", token)
@@ -102,7 +94,7 @@ describe("Tasks API endpoint", () => {
       });
   });
 
-  it("PUT /tasks/id -> edits a task", () => {
+  it("PUT /tasks/:id -> edits a task", () => {
     return request(app)
       .put(`/api/v1/tasks/${seedTask1._id}`)
       .set("Authorization", token)
@@ -114,7 +106,7 @@ describe("Tasks API endpoint", () => {
       });
   });
 
-  it("DELETE /tasks/id -> deletes a task", () => {
+  it("DELETE /tasks/:id -> deletes a task", () => {
     return request(app)
       .delete(`/api/v1/tasks/${seedTask1._id}`)
       .set("Authorization", token)

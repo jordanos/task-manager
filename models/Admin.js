@@ -4,7 +4,7 @@ const AdminSchema = new mongoose.Schema(
   {
     canRead: {
       type: Boolean,
-      default: false,
+      default: true,
     },
     canWrite: {
       type: Boolean,
@@ -14,10 +14,15 @@ const AdminSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
+    canRemoveAdmin: {
+      type: Boolean,
+      default: false,
+    },
     owner: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
+      unique: true,
     },
   },
   {

@@ -9,7 +9,7 @@ const {
   DeleteOne,
   UpdateOne,
 } = require("./templates");
-const { validateAdminInput } = require("./validators");
+const { validateAdminInput } = require("../utils/validators");
 
 exports.listAdmins = (req, res, next) => {
   const getAll = new GetAll(req, res, next, Admin, "admin");

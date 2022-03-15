@@ -9,11 +9,7 @@ const token = jwt.sign({ id: seedUser1._id }, process.env.SECRET_KEY, {
   expiresIn: "9999d",
 });
 
-userSchema = {
-  name: expect.any(String),
-  email: expect.any(String),
-  createdAt: expect.any(String),
-};
+const { userSchema } = require("./schemas");
 
 // /users integration test
 describe("Users API endpoint", () => {
@@ -93,7 +89,7 @@ describe("Users API endpoint", () => {
       });
   });
 
-  it("GET /users/id -> gets a user", () => {
+  it("GET /users/:id -> gets a user", () => {
     return request(app)
       .get(`/api/v1/users/${seedUser1._id}`)
       .expect("Content-Type", /json/)
@@ -103,7 +99,7 @@ describe("Users API endpoint", () => {
       });
   });
 
-  it("PUT /users/id -> edits a user", () => {
+  it("PUT /users/:id -> edits a user", () => {
     return request(app)
       .put(`/api/v1/users/${seedUser1._id}`)
       .set("Authorization", token)
@@ -115,7 +111,7 @@ describe("Users API endpoint", () => {
       });
   });
 
-  it("DELETE /users/id -> deletes a user", () => {
+  it("DELETE /users/:id -> deletes a user", () => {
     return request(app)
       .delete(`/api/v1/users/${seedUser1._id}`)
       .set("Authorization", token)

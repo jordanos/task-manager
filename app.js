@@ -38,13 +38,14 @@ const usersRoute = require("./routes/users");
 const tasksRoute = require("./routes/tasks");
 const authRoute = require("./routes/auth");
 const adminsRoute = require("./routes/admins");
-const { adminReq } = require("./middlewares/authMiddleware");
+const { loginReq } = require("./middlewares/authMiddleware");
+const { adminReq } = require("./middlewares/authorizationMiddleware");
 
 // Use Routes
 app.use("/api/v1/users", usersRoute);
 app.use("/api/v1/tasks", tasksRoute);
 app.use("/api/v1/auth", authRoute);
-app.use("/api/v1/admins", adminReq, adminsRoute);
+app.use("/api/v1/admins", loginReq, adminReq, adminsRoute);
 
 // Error handler middleware
 app.use(errorHandler);

@@ -1,5 +1,5 @@
 const Joi = require("joi");
-const CustomError = require("../utils/CustomError");
+const CustomError = require("./CustomError");
 
 const userSchema = Joi.object({
   name: Joi.string().required(),
@@ -7,15 +7,15 @@ const userSchema = Joi.object({
   password: Joi.string().min(6).required(),
 });
 
-const adminSchema = Joi.object({
-  owner: Joi.string().required(),
-});
-
 const taskSchema = Joi.object({
   title: Joi.string().required(),
   desc: Joi.string().required(),
   start: Joi.date().required(),
   end: Joi.date().required(),
+  owner: Joi.string().required(),
+});
+
+const adminSchema = Joi.object({
   owner: Joi.string().required(),
 });
 
