@@ -1,3 +1,20 @@
+exports.options = {
+  swaggerOptions: {
+    authAction: {
+      JWT: {
+        name: "JWT",
+        schema: {
+          type: "apiKey",
+          in: "header",
+          name: "Authorization",
+          description: "",
+        },
+        value: "Bearer <JWT>",
+      },
+    },
+  },
+};
+
 exports.swaggerOptions = {
   swaggerDefinition: {
     openapi: "3.0.0",
@@ -10,6 +27,16 @@ exports.swaggerOptions = {
         email: "jordanoswork2021@gmail.com",
       },
       servers: ["http://localhost:5000"],
+    },
+    components: {
+      securitySchemes: {
+        JWT: {
+          description: "",
+          type: "apiKey",
+          name: "Authorization",
+          in: "header",
+        },
+      },
     },
     security: [{ bearerAuth: [] }],
   },

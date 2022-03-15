@@ -28,7 +28,7 @@ app.use(cors());
 
 // api automatic documentaion
 // Extended: https://swagger.io/specification/#infoObject
-const { swaggerOptions } = require("./docs/swagger");
+const { swaggerOptions, options } = require("./docs/swagger");
 
 const swaggerDocs = swaggerJsDoc(swaggerOptions);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
