@@ -1,5 +1,5 @@
 # Todo API
-###### **It is made based on: nodejs and express web framework.**
+###### **Made with nodejs and express web framework.**
 
 #### The API documentation can be found at */api-doc* endpoint. 
 
@@ -15,4 +15,9 @@
 - list all users
 - list all tasks
 - list tasks per user
+
+
+###### Except creating users most of the api routes needs authentication. Auth token can be obtained by logging in.
+###### If you are using postman or other api testing tools don't forget to add your token in the header section -> *Authorization:* **your token**
+###### To authenticate users/add token on the documentation please use the authorize button found on the header and add your token.
 
