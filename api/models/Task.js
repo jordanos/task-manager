@@ -18,8 +18,8 @@ const TaskSchema = new mongoose.Schema(
       type: Date,
       required: [true, "Please provide end time"],
     },
-    isDone: {
-      type: Boolean,
+    status: {
+      type: String,
       default: false,
     },
     createdAt: {
