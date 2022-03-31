@@ -1,13 +1,17 @@
-import Home from 'pages/home';
 import React from 'react';
+import AppRoutes from './AppRoutes';
+import BaseStyles from './BaseStyles';
+import './fontStyles.css';
+import NormalizeStyles from './NormalizeStyles';
 
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header className="App-header">Todo app</header>
-      <Home />
-    </div>
+    <>
+      <NormalizeStyles />
+      <BaseStyles />
+      <AppRoutes />
+    </>
   );
-}
+};
 
 export default App;
