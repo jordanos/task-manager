@@ -7,6 +7,7 @@ const Modal: React.FC = () => {
   const onClick = () => {
     console.log('pressed');
   };
+
   return (
     <StyledContainer onClick={onClick}>
       <StyledWrapper

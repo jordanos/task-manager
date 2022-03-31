@@ -1,4 +1,4 @@
-import { color, font } from 'shared/utils/Styles';
+import { colors, font } from 'shared/utils/Styles';
 import styled, { css } from 'styled-components';
 
 interface Props {
@@ -23,13 +23,13 @@ export const StyledDay = styled.div<Props>`
         `
       : css`
           height: 90px;
-          color: ${props.active ? 'black' : color.textLight};
-          background: ${color.backgroundLightest};
+          color: ${props.active ? 'black' : colors.textLight};
+          background: ${colors.backgroundLightest};
           border: 1px solid #e7e8ea;
           box-sizing: border-box;
           transition: all ease-in 200ms;
           &:hover {
-            background: ${color.backgroundLight};
+            background: ${colors.backgroundLight};
           }
         `}
 `;
@@ -42,7 +42,7 @@ export const StyledHeader = styled.div`
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
-  color: ${color.primary};
+  color: ${colors.primary};
   ${font.bold};
   font-size: 34px;
 `;

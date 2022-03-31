@@ -1,4 +1,4 @@
-import { color, font, mixin } from 'shared/utils/Styles';
+import { colors, font, mixin } from 'shared/utils/Styles';
 import { createGlobalStyle } from 'styled-components';
 
 export default createGlobalStyle`
@@ -9,8 +9,8 @@ export default createGlobalStyle`
   }
 
   body {
-    color: ${color.textDarkest};
-    background: ${color.backgroundMedium};
+    color: ${colors.textDarkest};
+    background: ${colors.backgroundMedium};
     -webkit-tap-highlight-color: transparent;
     line-height: 1.2;
     ${font.size(16)}
@@ -83,7 +83,7 @@ export default createGlobalStyle`
     display: none;
   }
   select option {
-    color: ${color.textDarkest};
+    color: ${colors.textDarkest};
   }
 
   p {
@@ -106,5 +106,5 @@ export default createGlobalStyle`
     touch-action: manipulation;
   }
 
-  ${mixin.placeholderColor(color.textLight)}
+  ${mixin.placeholderColor(colors.textLight)}
 `;

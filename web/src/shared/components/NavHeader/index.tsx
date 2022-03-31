@@ -21,7 +21,7 @@ const active = {
 
 const time = { date: '15 dec 2021', time: '10:30' };
 
-const Nav = () => {
+const NavHeader = () => {
   return (
     <StyledNav>
       <StyledWrapper direction="row">
@@ -44,4 +44,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default NavHeader;

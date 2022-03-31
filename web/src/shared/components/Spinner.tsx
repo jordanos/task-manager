@@ -1,5 +1,5 @@
 import React from 'react';
-import { color } from 'shared/utils/Styles';
+import { colors } from 'shared/utils/Styles';
 
 interface Props {
   className?: string | undefined;
@@ -207,7 +207,7 @@ const Spinner: React.FC<Props> = ({ className, size, color }) => (
 Spinner.defaultProps = {
   className: undefined,
   size: 32,
-  color: color.primary,
+  color: colors.primary,
 };
 
 export default Spinner;

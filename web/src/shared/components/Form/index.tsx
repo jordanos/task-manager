@@ -1,5 +1,5 @@
 import React, { FormEventHandler } from 'react';
-import { color } from 'shared/utils/Styles';
+import { colors } from 'shared/utils/Styles';
 import StyledWrapper from '../Wrappers/Styles';
 import StyledForm, { StyledButton, StyledInput } from './Styles';
 
@@ -15,7 +15,6 @@ interface InputInterface {
 }
 
 interface ButtonInterface {
-  // onClick: onClick;
   type: 'submit' | 'button' | 'reset' | undefined;
 }
 
@@ -32,7 +31,7 @@ export const TextInput: React.FC<InputInterface> = ({
 }) => {
   return (
     <StyledWrapper align="flex-start">
-      <label style={{ color: `${color.textLight}`, fontSize: '14px' }}>
+      <label style={{ color: `${colors.textLight}`, fontSize: '14px' }}>
         {children}
       </label>
       <StyledInput width={width} placeholder={placeholer} />

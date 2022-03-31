@@ -1,7 +1,7 @@
 import Color from 'color';
 import { css } from 'styled-components';
 
-export const color = {
+export const colors = {
   primary: '#6C6CEA', // indigo
   success: '#0B875B', // green
   danger: '#E13C3C', // red
@@ -66,12 +66,13 @@ export const sizes = {
 export const zIndexValues = {
   modal: 1000,
   dropdown: 101,
-  navLeft: 100,
+  sidebar: 5,
+  navHeader: 1,
 };
 
 export const font = {
   regular: 'font-family: "Roboto"; font-weight: normal;',
-  medium: 'font-family: "CircularStdMedium"; font-weight: normal;',
+  light: 'font-family: "RobotoLight"; font-weight: normal;',
   bold: 'font-family: "RobotoBold";',
   black: 'font-family: "CircularStdBlack"; font-weight: normal;',
   size: (size: number) => `font-size: ${size}px;`,
@@ -135,7 +136,7 @@ export const mixin = {
   `,
   customScrollbar: ({
     width = 8,
-    background = color.backgroundMedium,
+    background = colors.backgroundMedium,
   } = {}) => css`
     &::-webkit-scrollbar {
       width: ${width}px;
@@ -153,12 +154,12 @@ export const mixin = {
     background-position: 50% 50%;
     background-repeat: no-repeat;
     background-size: cover;
-    background-color: ${color.backgroundLight};
+    background-color: ${colors.backgroundLight};
   `,
-  link: (colorValue = color.textLink) => css`
+  link: (colorValue = colors.textLink) => css`
     cursor: pointer;
     color: ${colorValue};
-    ${font.medium}
+    ${font.regular}
     &:hover, &:visited, &:active {
       color: ${colorValue};
     }
@@ -167,8 +168,8 @@ export const mixin = {
     }
   `,
   tag: (
-    background = color.backgroundMedium,
-    colorValue = color.textDarkest
+    background = colors.backgroundMedium,
+    colorValue = colors.textDarkest
   ) => css`
     display: inline-flex;
     align-items: center;

@@ -1,9 +1,9 @@
-import { color, sizes } from 'shared/utils/Styles';
+import { colors, sizes, zIndexValues } from 'shared/utils/Styles';
 import styled from 'styled-components';
 
 export const StyledNav = styled.nav`
-  color: ${color.primary};
-  background: ${color.backgroundLightest};
+  color: ${colors.primary};
+  background: ${colors.backgroundLightest};
   height: ${sizes.navHeight};
   display: flex;
   flex-direction: row;
@@ -15,5 +15,5 @@ export const StyledNav = styled.nav`
   top: 0;
   left: 0;
   right: 0;
-  z-index: 1;
+  z-index: ${zIndexValues.navHeader};
 `;

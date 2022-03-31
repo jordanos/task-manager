@@ -1,20 +1,19 @@
-import { color, sizes, zIndexValues } from 'shared/utils/Styles';
+import { colors, sizes, zIndexValues } from 'shared/utils/Styles';
 import styled from 'styled-components';
 
 const StyledSidebar = styled.aside`
   width: ${sizes.navHeight};
-  color: ${color.primary};
+  color: ${colors.primary};
   position: fixed;
   left: 0;
   top: 0;
-  right: o;
   bottom: 0;
-  background: ${color.backgroundLightest};
+  background: ${colors.backgroundLightest};
   display: flex;
   flex-direction: column;
   align-items: center;
   padding-top: 80px;
-  z-index: ${zIndexValues.navLeft};
+  z-index: ${zIndexValues.sidebar};
 `;
 
 export const StyledItem = styled.div`
@@ -26,7 +25,7 @@ export const StyledItem = styled.div`
   border-radius: 5px;
 
   &:hover {
-    background: ${color.backgroundLight};
+    background: ${colors.backgroundLight};
   }
 `;
 

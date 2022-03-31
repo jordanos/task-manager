@@ -1,4 +1,4 @@
-import { color, font } from 'shared/utils/Styles';
+import { colors, font } from 'shared/utils/Styles';
 import styled from 'styled-components';
 
 interface InputInterface {
@@ -9,7 +9,7 @@ interface InputInterface {
 const StyledForm = styled.form`
   width: 437px;
   height: 380px;
-  background: ${color.backgroundMedium};
+  background: ${colors.backgroundMedium};
   border-radius: 30px;
   display: flex;
   flex-direction: column;
@@ -31,8 +31,8 @@ export const StyledInput = styled.input<InputInterface>`
 export const StyledButton = styled.button`
   width: 105px;
   height: 28px;
-  background: ${color.backgroundDark};
-  color: ${color.backgroundLightest};
+  background: ${colors.backgroundDark};
+  color: ${colors.backgroundLightest};
   ${font.bold}
   border-radius: 50px;
   box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
