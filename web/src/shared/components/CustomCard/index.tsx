@@ -42,17 +42,12 @@ const CustomCard: React.FC<Props> = ({
           et consequat. Cras quis dapibus augue. Phasellus nec fermentum mauris.
           Aenean et eros ut erat gravida rhoncus a et velit.
         </StyledDesc>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-          }}>
+        <StyledWrapper direction="row" justify="space-between">
           <StyledTitle>15 dez 2021</StyledTitle>
-          <StyledWrapper direction={'row'} justify={'space-between'}>
+          <StyledWrapper direction="row" justify="space-between">
             <StyledWrapper
               direction="row"
-              justify={'space-between'}
+              justify="space-between"
               style={{
                 width: '60px',
               }}>
@@ -84,7 +79,7 @@ const CustomCard: React.FC<Props> = ({
               </svg>
             </StyledWrapper>
           </StyledWrapper>
-        </div>
+        </StyledWrapper>
       </StyledCard>
     </div>
   );

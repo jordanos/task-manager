@@ -1,5 +1,5 @@
 import React from 'react';
-import { color } from 'shared/utils/Styles';
+import { colors } from 'shared/utils/Styles';
 import StyledWrapper from '../Wrappers/Styles';
 import { StyledHeader } from './Styles';
 
@@ -30,32 +30,11 @@ export const Header: React.FC<Props> = ({
   t,
   laneDraggable,
 }) => {
-  //  <LaneHeader onDoubleClick={onDoubleClick} editLaneTitle={editLaneTitle}>
-  //    <Title draggable={laneDraggable} style={titleStyle}>
-  //      {editLaneTitle ? (
-  //        <InlineInput
-  //          value={title}
-  //          border
-  //          placeholder={t('placeholder.title')}
-  //          resize="vertical"
-  //          onSave={updateTitle}
-  //        />
-  //      ) : (
-  //        title
-  //      )}
-  //    </Title>
-  //    {label && (
-  //      <RightContent>
-  //        <span style={labelStyle}>{label}</span>
-  //      </RightContent>
-  //    )}
-  //    {canAddLanes && <LaneMenu t={t} onDelete={onDelete} />}
-  //  </LaneHeader>;
   const init = () => {
     switch (laneType) {
       case 'todo':
         return {
-          color: color.backgroundDark,
+          color: colors.backgroundDark,
           icon: (
             <svg
               width="25"
@@ -72,7 +51,7 @@ export const Header: React.FC<Props> = ({
         };
       case 'progress':
         return {
-          color: color.warning,
+          color: colors.warning,
           icon: (
             <svg
               width="21"
@@ -89,7 +68,7 @@ export const Header: React.FC<Props> = ({
         };
       case 'done':
         return {
-          color: color.success,
+          color: colors.success,
           icon: (
             <svg
               width="25"
@@ -105,7 +84,7 @@ export const Header: React.FC<Props> = ({
           ),
         };
       default:
-        return { color: color.backgroundDark, icon: '' };
+        return { color: colors.backgroundDark, icon: '' };
     }
   };
 

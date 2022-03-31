@@ -1,9 +1,9 @@
-import { color, font, mixin, sizes } from 'shared/utils/Styles';
+import { colors, font, mixin, sizes } from 'shared/utils/Styles';
 import styled from 'styled-components';
 
 export const StyledCard = styled.div`
   width: ${sizes.cardWidth};
-  background: ${color.backgroundLightest};
+  background: ${colors.backgroundLightest};
   border-radius: 10px;
   display: flex;
   flex-direction: column;

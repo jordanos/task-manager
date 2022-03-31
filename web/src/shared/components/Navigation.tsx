@@ -1,11 +1,11 @@
 import React from 'react';
-import Nav from './Nav';
+import NavHeader from './NavHeader';
 import Sidebar from './Sidebar';
 
 const Navigation = () => {
   return (
     <>
-      <Nav />
+      <NavHeader />
       <Sidebar />
     </>
   );
