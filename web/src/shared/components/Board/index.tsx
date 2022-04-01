@@ -17,6 +17,8 @@ const CustomBoard: React.FC<Props> = ({ data }) => {
   const laneStyle = {
     background: 'rgba(0,0,0,0.03)',
     width: `calc(${sizes.cardWidth} + 20px)`,
+    // height: `calc(100vh - calc(${sizes.navHeight} + 50px))`,
+
     maxHeight: '100%',
     scrollbarColor: `${colors.primary} transparent`,
   };

@@ -1,3 +1,4 @@
+import Dashboard from 'pages/dashboard';
 import Events from 'pages/events';
 import Tasks from 'pages/tasks';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
@@ -9,8 +10,9 @@ const AppRoutes = () => {
       <Navigation />
 
       <Routes>
-        <Route path="*" element={<Tasks />} />
+        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/events" element={<Events />} />
+        <Route path="*" element={<Tasks />} />
       </Routes>
     </Router>
   );

@@ -2,7 +2,7 @@ export const data = {
   lanes: [
     {
       id: 'lane1',
-      laneType: 'todo',
+      type: 'todo',
       title: 'To Do',
       label: '2/2',
       cards: [
@@ -34,14 +34,14 @@ export const data = {
     },
     {
       id: 'lane2',
-      laneType: 'progress',
+      type: 'progress',
       title: 'In Progress',
       label: '0/0',
       cards: [],
     },
     {
       id: 'lane3',
-      laneType: 'done',
+      type: 'done',
       title: 'Done',
       label: '0/0',
       cards: [],

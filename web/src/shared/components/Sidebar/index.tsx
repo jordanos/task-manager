@@ -5,7 +5,7 @@ import StyledSidebar, { StyledItem } from './Styles';
 const Sidebar = () => {
   return (
     <StyledSidebar>
-      <Link to="/">
+      <Link to="/dashboard">
         <StyledItem>
           <svg
             width="30"

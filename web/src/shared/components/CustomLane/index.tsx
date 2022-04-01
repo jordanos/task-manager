@@ -4,8 +4,7 @@ import StyledWrapper from '../Wrappers/Styles';
 import { StyledHeader } from './Styles';
 
 interface Props {
-  icon: React.FC;
-  laneType: 'todo' | 'progress' | 'done';
+  type: 'todo' | 'progress' | 'done';
   updateTitle?: Function;
   editLaneTitle?: boolean;
   canAddLanes?: boolean;
@@ -14,12 +13,11 @@ interface Props {
   title?: string;
   onDelete?: Function;
   onDoubleClick?: Function;
-  t: Function;
+  background?: string;
 }
 
 export const Header: React.FC<Props> = ({
-  icon,
-  laneType,
+  type,
   updateTitle,
   canAddLanes,
   onDelete,
@@ -27,11 +25,11 @@ export const Header: React.FC<Props> = ({
   editLaneTitle,
   label,
   title,
-  t,
   laneDraggable,
+  background,
 }) => {
   const init = () => {
-    switch (laneType) {
+    switch (type) {
       case 'todo':
         return {
           color: colors.backgroundDark,
@@ -91,7 +89,7 @@ export const Header: React.FC<Props> = ({
   const dict = init();
 
   return (
-    <StyledHeader color={dict.color}>
+    <StyledHeader color={dict.color} background={background && background}>
       <StyledWrapper direction={'row'} justify={'center'}>
         {dict.icon}
         <h3 style={{ fontWeight: 'lighter', marginLeft: '15px' }}>{title}</h3>
@@ -104,5 +102,5 @@ Header.defaultProps = {
   updateTitle: () => {},
   editLaneTitle: false,
   canAddLanes: false,
-  laneType: 'todo',
+  type: 'todo',
 };
