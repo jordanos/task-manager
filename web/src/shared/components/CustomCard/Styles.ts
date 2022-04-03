@@ -9,6 +9,7 @@ export const StyledCard = styled.div`
   flex-direction: column;
   justify-content: start;
   padding: 10px 11px;
+  padding-right: 20px;
   padding-bottom: 0;
   margin-bottom: 20px;
   ${mixin.clickable}

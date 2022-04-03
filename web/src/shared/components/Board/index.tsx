@@ -1,18 +1,25 @@
+import BoardController from 'pages/tasks/BoardController';
 import React from 'react';
-import { connect } from 'react-redux';
 import Board from 'react-trello';
 import CustomCard from 'shared/components/CustomCard';
+import { Task } from 'shared/store/reducers/taskReducer';
 import { colors, sizes } from 'shared/utils/Styles';
+import AddCardLink from '../AddCardLink';
 import { Header as LaneHeader } from '../CustomLane';
+import NewCardForm from '../NewCardForm';
 
-interface props {
-  controller: Function;
-  tasks?: [];
+interface PropsInterface {
+  tasks: Task[];
+  controller: BoardController;
+  addTask: Function;
+  onEdit: Function;
 }
 
 const components = {
   Card: CustomCard,
-  LaneHeader: LaneHeader,
+  LaneHeader,
+  AddCardLink,
+  NewCardForm,
 };
 
 const laneStyle = {
@@ -33,20 +40,24 @@ const boardStyle = {
   paddingTop: '80px',
 };
 
-const CustomBoard: React.FC<props> = ({ controller, tasks }) => {
+const CustomBoard: React.FC<PropsInterface> = ({
+  tasks,
+  controller,
+  addTask,
+  onEdit,
+}) => {
   return (
     <Board
       style={boardStyle}
-      data={controller(tasks)}
+      data={controller.getBoard()}
       components={components}
       laneStyle={laneStyle}
-      editable={true}
+      editable
+      onCardAdd={(task: Task) => {
+        addTask({ ...task, assignedTo: 'myself' });
+      }}
     />
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return { tasks: state.task.tasks };
-};
-
-export default connect(mapStateToProps)(CustomBoard);
+export default CustomBoard;

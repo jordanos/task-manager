@@ -5,9 +5,15 @@ import StyledWrapper from 'shared/components/Wrappers/Styles';
 const InProgress: React.FC = () => {
   return (
     <StyledWrapper>
-      <CustomCard onEdit={null} onClick={() => {}} id="1" title="New Task" />
-      <CustomCard onEdit={null} onClick={() => {}} id="1" title="New Task" />
-      <CustomCard onEdit={null} onClick={() => {}} id="1" title="New Task" />
+      <CustomCard
+        onEdit={null}
+        onClick={() => {}}
+        onDelete={null}
+        id="1"
+        description=""
+        title="New Task"
+        date="12/2/22"
+      />
     </StyledWrapper>
   );
 };

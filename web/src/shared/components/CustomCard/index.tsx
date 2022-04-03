@@ -1,19 +1,25 @@
+/* eslint-disable jsx-a11y/no-static-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { MouseEventHandler } from 'react';
+import { Task } from 'shared/store/reducers/taskReducer';
+import { colors } from 'shared/utils/Styles';
+import Button from '../Button';
 import StyledWrapper from '../Wrappers/Styles';
 import { StyledCard, StyledDesc, StyledTitle } from './Styles';
 
 interface Props {
-  onEdit?: MouseEventHandler | null;
+  onEdit: Function | null;
+  onDelete: Function | null;
   showDeleteButton?: boolean;
-  onDelete?: MouseEventHandler;
-  onClick: any;
+  onClick: MouseEventHandler;
   style?: Object;
   tagStyle?: Object;
   className?: string;
   id: string;
   title: string;
+  date: string;
   label?: string;
-  description?: string;
+  description: string;
   tags?: [];
 }
 
@@ -27,32 +33,50 @@ const CustomCard: React.FC<Props> = ({
   className,
   id,
   title,
+  date,
   label,
   description,
   tags,
 }) => {
+  const task: Task = {
+    id,
+    title,
+    description,
+    date,
+    status: 'todo',
+    assignedTo: 'myself',
+  };
+
   return (
     <div data-id={id} onClick={onClick}>
       <StyledCard>
-        <StyledTitle>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit
-        </StyledTitle>
-        <StyledDesc>
-          Sed vitae lobortis nulla, ut vulputate augue. Nullam mollis non ante
-          et consequat. Cras quis dapibus augue. Phasellus nec fermentum mauris.
-          Aenean et eros ut erat gravida rhoncus a et velit.
-        </StyledDesc>
-        <StyledWrapper direction="row" justify="space-between">
-          <StyledTitle>15 dez 2021</StyledTitle>
+        {onDelete ? (
           <StyledWrapper direction="row" justify="space-between">
-            <StyledWrapper
-              direction="row"
-              justify="space-around"
-              style={{ paddingRight: '10px' }}>
+            <StyledTitle>{title}</StyledTitle>
+            <Button
+              onClick={() => onDelete(task)}
+              bg={colors.backgroundDark}
+              color="white"
+              radius="100px"
+              padding="0.1em 0.4em"
+              style={{
+                fontSize: '14px',
+              }}>
+              x
+            </Button>
+          </StyledWrapper>
+        ) : (
+          <StyledTitle>{title}</StyledTitle>
+        )}
+        <StyledDesc>{description}</StyledDesc>
+        <StyledWrapper direction="row" justify="space-between">
+          <StyledTitle>{date}</StyledTitle>
+          <StyledWrapper direction="row" justify="space-between">
+            <StyledWrapper direction="row" justify="space-around" style={{}}>
               {/*  person */}
               <svg
-                width="25"
-                height="25"
+                width="22"
+                height="22"
                 viewBox="0 0 25 25"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg">
@@ -65,10 +89,10 @@ const CustomCard: React.FC<Props> = ({
               {/* edit */}
               {onEdit && (
                 <svg
-                  onClick={onEdit}
-                  style={{ marginLeft: '15px' }}
-                  width="25"
-                  height="23"
+                  onClick={() => onEdit(task)}
+                  style={{ marginLeft: '20px' }}
+                  width="22"
+                  height="22"
                   viewBox="0 0 25 23"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg">
@@ -87,14 +111,9 @@ const CustomCard: React.FC<Props> = ({
 };
 
 CustomCard.defaultProps = {
-  onEdit: () => {},
   showDeleteButton: true,
-  onDelete: () => {},
-  onClick: () => {},
   style: {},
   tagStyle: {},
-  title: 'no title',
-  description: '',
   label: '',
   tags: [],
   className: '',

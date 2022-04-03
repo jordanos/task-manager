@@ -10,9 +10,9 @@ const AppRoutes = () => {
       <Navigation />
 
       <Routes>
-        <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/events" element={<Events />} />
-        <Route path="*" element={<Tasks />} />
+        <Route path="/tasks" element={<Tasks />} />
+        <Route path="*" element={<Dashboard />} />
       </Routes>
     </Router>
   );

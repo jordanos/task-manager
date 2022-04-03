@@ -3,7 +3,7 @@ import { css } from 'styled-components';
 
 export const colors = {
   primary: '#6C6CEA', // indigo
-  success: '#0B875B', // green
+  success: '#58BA6E', // green
   danger: '#E13C3C', // red
   warning: '#F89C1C', // orange
   secondary: '#F4F5F7', // light grey
@@ -20,7 +20,6 @@ export const colors = {
   backgroundLight: '#ebecf0',
   backgroundLightest: '#fff',
   backgroundLightPrimary: '#D2E5FE',
-  backgroundLightSuccess: '#E4FCEF',
 
   borderLightest: '#dfe1e6',
   borderLight: '#C1C7D0',
