@@ -1,15 +1,11 @@
 import { Task } from 'shared/store/reducers/taskReducer';
 
-type Card = {
-  id: string;
-  title: string;
-  description: string;
-  date: Date;
+interface Card extends Task {
   label: string;
   draggable: boolean;
   onEdit: Function;
   onDelete: Function;
-};
+}
 
 class BoardController {
   todoCards: Card[] = [];
@@ -31,10 +27,7 @@ class BoardController {
 
   changeTaskToCard = (task: Task): Card => {
     const card: Card = {
-      id: task.id,
-      title: task.title,
-      description: task.description,
-      date: task.date,
+      ...task,
       label: 'new',
       draggable: true,
       onEdit: this.onEdit,

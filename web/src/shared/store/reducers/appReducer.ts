@@ -1,3 +1,6 @@
+import React from 'react';
+import DashboardIcon from 'shared/assets/icons/DashboardIcon';
+
 /* eslint-disable @typescript-eslint/default-param-last */
 type Modal = {
   active: boolean;
@@ -5,7 +8,7 @@ type Modal = {
 
 export type NavHeader = {
   title: string;
-  icon: any;
+  icon: React.FC;
 };
 
 interface AppState {
@@ -19,7 +22,7 @@ const initialState: AppState = {
   },
   navHeader: {
     title: '',
-    icon: '',
+    icon: DashboardIcon,
   },
 };
 

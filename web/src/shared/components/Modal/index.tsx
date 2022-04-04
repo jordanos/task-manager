@@ -1,35 +1,28 @@
 import React from 'react';
-import { zIndexValues } from 'shared/utils/Styles';
-import StyledContainer from './Styles';
+import { connect } from 'react-redux';
+import ModalPresentation from './presentation';
 
 interface Props {
   toggleView: Function;
-  model: any;
+  modal: any;
 }
 
-const Modal: React.FC<Props> = ({ model, toggleView, children }) => {
+const Modal: React.FC<Props> = ({ modal, toggleView, children }) => {
   return (
-    <>
-      {/* modal background */}
-      <StyledContainer
-        className="modal-bg"
-        active={model.active}
-        onClick={() => toggleView()}
-      />
-      {/* actual modal */}
-      <div
-        style={{
-          position: 'relative',
-          left: '30%',
-          top: `20%`,
-          width: '100px',
-          display: model.active ? 'block' : 'none',
-          zIndex: zIndexValues.modal,
-        }}>
-        {children}
-      </div>
-    </>
+    <ModalPresentation modal={modal} toggleView={toggleView}>
+      {children}
+    </ModalPresentation>
   );
 };
 
-export default Modal;
+const mapStateToProps = (state: any) => {
+  return { modal: state.app.modal };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    toggleView: () => dispatch({ type: 'TOGGLE_MODAL_VIEW', payload: {} }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Modal);

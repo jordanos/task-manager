@@ -13,7 +13,7 @@ const NavHeader: React.FC<Props> = ({ navHeader }) => {
   return (
     <StyledNav>
       <StyledWrapper direction="row">
-        {navHeader.icon}
+        <navHeader.icon />
         <div
           style={{
             fontFamily: 'RobotoBold',
