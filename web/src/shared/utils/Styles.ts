@@ -60,13 +60,14 @@ export const sizes = {
   minViewportWidth: '1000px',
   cardWidth: '350px',
   navHeight: '56px',
+  dashboardProgressSize: '490px',
 };
 
 export const zIndexValues = {
   modal: 1000,
   dropdown: 101,
   sidebar: 5,
-  navHeader: 1,
+  navHeader: 2,
 };
 
 export const font = {
