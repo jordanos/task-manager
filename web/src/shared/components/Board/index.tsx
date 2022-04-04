@@ -1,6 +1,7 @@
-import BoardController from 'pages/tasks/BoardController';
 import React from 'react';
+import { connect } from 'react-redux';
 import Board from 'react-trello';
+import BoardController from 'shared/components/Board/BoardController';
 import CustomCard from 'shared/components/CustomCard';
 import { Task } from 'shared/store/reducers/taskReducer';
 import { colors, sizes } from 'shared/utils/Styles';
@@ -10,9 +11,10 @@ import NewCardForm from '../NewCardForm';
 
 interface PropsInterface {
   tasks: Task[];
-  controller: BoardController;
   addTask: Function;
-  onEdit: Function;
+  preEdit: Function;
+  toggleView: Function;
+  deleteTask: Function;
 }
 
 const components = {
@@ -40,12 +42,21 @@ const boardStyle = {
   paddingTop: '80px',
 };
 
-const CustomBoard: React.FC<PropsInterface> = ({
-  tasks,
-  controller,
-  addTask,
-  onEdit,
-}) => {
+const CustomBoard: React.FC<PropsInterface> = (props) => {
+  const { tasks, addTask, preEdit, toggleView, deleteTask } = props;
+
+  const onEdit = (task: Task) => {
+    preEdit(task);
+    toggleView();
+  };
+
+  const onDelete = (task: Task) => {
+    deleteTask(task);
+  };
+
+  // init board object to control bard data
+  const controller = new BoardController(tasks, onEdit, onDelete);
+
   return (
     <Board
       style={boardStyle}
@@ -60,4 +71,18 @@ const CustomBoard: React.FC<PropsInterface> = ({
   );
 };
 
-export default CustomBoard;
+const mapStateToProps = (state: any) => {
+  return { tasks: state.task.tasks };
+};
+
+const mapDispatchToProps = (dispatch: any) => {
+  return {
+    toggleView: () => dispatch({ type: 'TOGGLE_MODAL_VIEW', payload: {} }),
+    addTask: (payload: Task) => dispatch({ type: 'ADD_TASK', payload }),
+    editTask: (payload: any) => dispatch({ type: 'EDIT_TASK', payload }),
+    preEdit: (payload: any) => dispatch({ type: 'PRE_EDIT', payload }),
+    deleteTask: (payload: any) => dispatch({ type: 'DELETE_TASK', payload }),
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(CustomBoard);

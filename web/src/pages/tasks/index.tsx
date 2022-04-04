@@ -1,12 +1,11 @@
 /* eslint-disable react/react-in-jsx-scope */
-import { lazy, useEffect, useState } from 'react';
+import { lazy, useEffect } from 'react';
 import { connect } from 'react-redux';
 import EditTask from 'shared/components/Form/EditTask';
 import Loader from 'shared/components/Loader';
 import Modal from 'shared/components/Modal';
 import { NavHeader } from 'shared/store/reducers/appReducer';
 import { Task } from 'shared/store/reducers/taskReducer';
-import BoardController from './BoardController';
 
 const CustomBoard = lazy(() => import('shared/components/Board'));
 
@@ -31,25 +30,7 @@ const Tasks: React.FC<Props> = ({
   setNavHeader,
   deleteTask,
 }) => {
-  const [defaultId, setDefaultId] = useState('');
-
-  const handleSubmit = (task: Task) => {
-    editTask(task);
-    toggleView();
-  };
-
-  const onEdit = (task: Task) => {
-    preEdit(task);
-    toggleView();
-  };
-
-  const onDelete = (task: Task) => {
-    deleteTask(task);
-  };
-
-  // init board object to control bard data
-  const controller = new BoardController(tasks, onEdit, onDelete);
-
+  // sets nav to this page icon and title
   useEffect(() => {
     const payload = {
       title: 'Tasks',
@@ -70,22 +51,19 @@ const Tasks: React.FC<Props> = ({
     setNavHeader(payload);
   }, []);
 
+  // handles when edited form is submited
+  const handleEdit = (task: Task) => {
+    editTask(task);
+    toggleView();
+  };
+
   return (
     <>
       <Modal model={modal} toggleView={toggleView}>
-        <EditTask onSubmit={handleSubmit} />
+        <EditTask onSubmit={handleEdit} />
       </Modal>
 
-      <Loader
-        component={
-          <CustomBoard
-            tasks={tasks}
-            addTask={addTask}
-            onEdit={editTask}
-            controller={controller}
-          />
-        }
-      />
+      <Loader component={<CustomBoard />} />
     </>
   );
 };
