@@ -17,7 +17,7 @@ interface Props {
   className?: string;
   id: string;
   title: string;
-  date: string;
+  date: Date;
   label?: string;
   description: string;
   tags?: [];
@@ -70,7 +70,7 @@ const CustomCard: React.FC<Props> = ({
         )}
         <StyledDesc>{description}</StyledDesc>
         <StyledWrapper direction="row" justify="space-between">
-          <StyledTitle>{date}</StyledTitle>
+          <StyledTitle>{date.toDateString()}</StyledTitle>
           <StyledWrapper direction="row" justify="space-between">
             <StyledWrapper direction="row" justify="space-around" style={{}}>
               {/*  person */}

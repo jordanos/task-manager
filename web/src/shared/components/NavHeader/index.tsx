@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import StyledWrapper from '../Wrappers/Styles';
-import { StyledNav } from './styles';
+import StyledNav from './styles';
 
 interface Props {
   navHeader: any;

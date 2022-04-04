@@ -6,7 +6,7 @@ interface Props {
   background?: string;
 }
 
-export const StyledHeader = styled.div<Props>`
+const StyledHeader = styled.div<Props>`
   color: ${(props) => props.color};
   ${font.bold};
   display: flex;
@@ -20,3 +20,5 @@ export const StyledHeader = styled.div<Props>`
 StyledHeader.defaultProps = {
   color: 'black',
 };
+
+export default StyledHeader;

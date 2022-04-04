@@ -4,7 +4,7 @@ type Card = {
   id: string;
   title: string;
   description: string;
-  date: string;
+  date: Date;
   label: string;
   draggable: boolean;
   onEdit: Function;

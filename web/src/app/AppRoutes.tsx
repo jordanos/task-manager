@@ -1,10 +1,11 @@
 import Dashboard from 'pages/dashboard';
 import Events from 'pages/events';
 import Tasks from 'pages/tasks';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Navigation from 'shared/components/Navigation';
 
-const AppRoutes = () => {
+const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Navigation />

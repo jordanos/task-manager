@@ -12,7 +12,7 @@ const InProgress: React.FC = () => {
         id="1"
         description=""
         title="New Task"
-        date="12/2/22"
+        date={new Date()}
       />
     </StyledWrapper>
   );

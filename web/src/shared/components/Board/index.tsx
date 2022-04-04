@@ -4,8 +4,8 @@ import Board from 'react-trello';
 import CustomCard from 'shared/components/CustomCard';
 import { Task } from 'shared/store/reducers/taskReducer';
 import { colors, sizes } from 'shared/utils/Styles';
-import AddCardLink from '../AddCardLink';
-import { Header as LaneHeader } from '../CustomLane';
+import AddCardLink from '../CustomAddCard';
+import LaneHeader from '../CustomLane';
 import NewCardForm from '../NewCardForm';
 
 interface PropsInterface {

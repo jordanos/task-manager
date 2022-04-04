@@ -3,7 +3,7 @@ export type Task = {
   id: string;
   title: string;
   description: string;
-  date: string;
+  date: Date;
   status: 'todo' | 'progress' | 'done';
   assignedTo: string;
 };
@@ -19,7 +19,7 @@ const initialState: TaskState = {
       id: 'string',
       title: 'string',
       description: 'string',
-      date: 'string',
+      date: new Date(),
       status: 'todo',
       assignedTo: 'string',
     },
@@ -28,7 +28,7 @@ const initialState: TaskState = {
     id: '',
     title: '',
     description: '',
-    date: '',
+    date: new Date(),
     status: 'todo',
     assignedTo: '',
   },

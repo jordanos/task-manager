@@ -1,7 +1,7 @@
 import React from 'react';
 import { colors } from 'shared/utils/Styles';
 import StyledWrapper from '../Wrappers/Styles';
-import { StyledHeader } from './Styles';
+import StyledHeader from './Styles';
 
 interface Props {
   type: 'todo' | 'progress' | 'done';
@@ -16,7 +16,7 @@ interface Props {
   background?: string;
 }
 
-export const Header: React.FC<Props> = ({
+const LaneHeader: React.FC<Props> = ({
   type,
   updateTitle,
   canAddLanes,
@@ -90,7 +90,7 @@ export const Header: React.FC<Props> = ({
 
   return (
     <StyledHeader color={dict.color} background={background && background}>
-      <StyledWrapper direction={'row'} justify={'center'}>
+      <StyledWrapper direction="row" justify="center">
         {dict.icon}
         <h3 style={{ fontWeight: 'lighter', marginLeft: '15px' }}>{title}</h3>
       </StyledWrapper>
@@ -98,9 +98,16 @@ export const Header: React.FC<Props> = ({
   );
 };
 
-Header.defaultProps = {
+LaneHeader.defaultProps = {
   updateTitle: () => {},
   editLaneTitle: false,
   canAddLanes: false,
-  type: 'todo',
+  laneDraggable: false,
+  label: 'string',
+  title: 'string',
+  onDelete: () => {},
+  onDoubleClick: () => {},
+  background: 'string',
 };
+
+export default LaneHeader;

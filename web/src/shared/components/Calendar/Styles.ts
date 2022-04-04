@@ -55,5 +55,3 @@ export const CalendarWrapper = styled.div`
   align: flex-start;
   justify: flex-start;
 `;
-
-export default StyledCalendar;

@@ -1,7 +1,7 @@
 import { colors, sizes, zIndexValues } from 'shared/utils/Styles';
 import styled from 'styled-components';
 
-export const StyledNav = styled.nav`
+const StyledNav = styled.nav`
   color: ${colors.primary};
   background: ${colors.backgroundLightest};
   height: ${sizes.navHeight};
@@ -17,3 +17,5 @@ export const StyledNav = styled.nav`
   right: 0;
   z-index: ${zIndexValues.navHeader};
 `;
+
+export default StyledNav;

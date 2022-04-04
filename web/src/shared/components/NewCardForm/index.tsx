@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import DateTimePicker from 'react-datetime-picker';
 import { colors } from 'shared/utils/Styles';
 import Button from '../Button';
 import TextInput from '../Form/TextInput';
@@ -10,7 +11,11 @@ interface PropsInterface {
 }
 
 const NewCardForm: React.FC<PropsInterface> = ({ onCancel, onAdd }) => {
-  const [data, setData] = useState({ title: '', description: '', date: '' });
+  const [data, setData] = useState({
+    title: '',
+    description: '',
+    date: new Date(),
+  });
 
   const updateData = (field: string, value: any) => {
     setData((prevState) => ({ ...prevState, [field]: value }));
@@ -44,14 +49,16 @@ const NewCardForm: React.FC<PropsInterface> = ({ onCancel, onAdd }) => {
           onChange={updateData}>
           Description
         </TextInput>
-        <TextInput
-          placeholer="04/30/22"
-          name="date"
-          type="text"
-          value={data.date}
-          onChange={updateData}>
-          Date
-        </TextInput>
+        <div
+          style={{
+            background: 'white',
+            marginTop: '10px',
+          }}>
+          <DateTimePicker
+            onChange={(value) => updateData('date', value)}
+            value={data.date}
+          />
+        </div>
       </StyledWrapper>
       <StyledWrapper direction="row" style={{ padding: '1em 0' }}>
         <Button bg={colors.success} color="white" onClick={handleAdd}>
