@@ -1,7 +1,7 @@
 import { colors, font } from 'shared/utils/Styles';
 import styled, { css } from 'styled-components';
 
-interface Props {
+interface PropsDay {
   active: boolean;
   header?: string;
 }
@@ -12,7 +12,7 @@ export const StyledCalendar = styled.div`
   border-radius: 10px;
 `;
 
-export const StyledDay = styled.div<Props>`
+export const StyledDay = styled.div<PropsDay>`
   width: 114px;
   ${(props) =>
     props.header
@@ -36,7 +36,7 @@ export const StyledDay = styled.div<Props>`
 
 export const StyledHeader = styled.div`
   width: 100%;
-  height: 100px;
+  height: 80px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -55,5 +55,3 @@ export const CalendarWrapper = styled.div`
   align: flex-start;
   justify: flex-start;
 `;
-
-export default StyledCalendar;

@@ -18,12 +18,12 @@
   "resolveJsonModule": true,
   "isolatedModules": true,
   "jsx": "preserve",
-  "incremental": true
-  },
+  "incremental": true,
   "typeRoots": [
-    "./node_modules/@types",
-    "./@types"
+    "./typings",
+    "./node_modules/@types/"
   ],
+  },
   "include": [
     "**/*.ts",
     "**/*.tsx"

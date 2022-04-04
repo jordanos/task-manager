@@ -7,14 +7,6 @@ interface InputInterface {
 }
 
 const StyledForm = styled.form`
-  width: 437px;
-  height: 380px;
-  background: ${colors.backgroundMedium};
-  border-radius: 30px;
-  display: flex;
-  flex-direction: column;
-  padding: 35px 25px;
-
   & > .form-row {
     margin-bottom: 20px;
   }

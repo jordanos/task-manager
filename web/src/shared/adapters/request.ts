@@ -8,7 +8,7 @@ interface ReturnInterface {
 }
 
 // This function servs as an adapter between axios methods and states
-export const Request = (
+const Request = (
   method: 'get' | 'post' | 'put' | 'delete',
   url: string,
   reqData: any = null
@@ -34,3 +34,5 @@ export const Request = (
 
   return { loading, error, data };
 };
+
+export default Request;
