@@ -16,12 +16,14 @@ interface TaskState {
 const initialState: TaskState = {
   tasks: [
     {
-      id: 'string',
-      title: 'string',
-      description: 'string',
+      id: `${Date.now()}`,
+      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
+      description: `Sed vitae lobortis nulla, ut vulputate augue. 
+      Nullam mollis non ante et consequat. Cras quis dapibus augue. 
+      Phasellus nec fermentum mauris. Aenean et eros ut erat gravida rhoncus a et velit.`,
       date: new Date(),
       status: 'todo',
-      assignedTo: 'string',
+      assignedTo: 'myself',
     },
   ],
   editableTask: {
