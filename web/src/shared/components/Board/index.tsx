@@ -1,13 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import Board from 'react-trello';
 import BoardController from 'shared/components/Board/BoardController';
-import CustomCard from 'shared/components/CustomCard';
 import { Task } from 'shared/store/reducers/taskReducer';
-import { colors, sizes } from 'shared/utils/Styles';
-import AddCardLink from '../CustomAddCard';
-import LaneHeader from '../CustomLane';
-import NewCardForm from '../NewCardForm';
+import { boardStyle, components, laneStyle } from './boardCustomization';
 
 interface PropsInterface {
   tasks: Task[];
@@ -16,31 +12,6 @@ interface PropsInterface {
   toggleView: Function;
   deleteTask: Function;
 }
-
-const components = {
-  Card: CustomCard,
-  LaneHeader,
-  AddCardLink,
-  NewCardForm,
-};
-
-const laneStyle = {
-  background: 'rgba(0,0,0,0.03)',
-  width: `calc(${sizes.cardWidth} + 20px)`,
-  maxHeight: `calc(100vh - calc(${sizes.navHeight} + 50px))`,
-  scrollbarColor: `${colors.primary} transparent`,
-};
-
-const boardStyle = {
-  background: `${colors.backgroundMedium}`,
-  position: 'fixed',
-  top: 0,
-  bottom: 0,
-  right: 0,
-  left: 0,
-  paddingLeft: '100px',
-  paddingTop: '80px',
-};
 
 const CustomBoard: React.FC<PropsInterface> = (props) => {
   const { tasks, addTask, preEdit, toggleView, deleteTask } = props;
@@ -54,8 +25,15 @@ const CustomBoard: React.FC<PropsInterface> = (props) => {
     deleteTask(task);
   };
 
-  // init board object to control bard data
-  const controller = new BoardController(tasks, onEdit, onDelete);
+  // init board object to control board data
+  const [controller, setController] = useState(
+    new BoardController(tasks, onEdit, onDelete)
+  );
+
+  useEffect(
+    () => setController(new BoardController(tasks, onEdit, onDelete)),
+    [tasks]
+  );
 
   return (
     <Board
