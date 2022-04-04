@@ -5,6 +5,7 @@ import EventsIcon from 'shared/assets/icons/EventsIcon';
 import Calendar from 'shared/components/Calendar';
 import { StyledMainWrapper } from 'shared/components/Wrappers/Styles';
 import { NavHeader } from 'shared/store/reducers/appReducer';
+import { sizes } from 'shared/utils/Styles';
 import EventsWeek from './EventsWeek';
 
 interface Props {
@@ -21,7 +22,10 @@ const Events: React.FC<Props> = ({ dispatch }) => {
 
   return (
     <StyledMainWrapper
-      style={{ marginTop: '2em', marginLeft: '2em' }}
+      style={{
+        paddingTop: `calc(${sizes.navHeight} + 2em)`,
+        paddingLeft: `calc(${sizes.navHeight} + 2em)`,
+      }}
       direction="row"
       justify="flex-start"
       align="flex-start">

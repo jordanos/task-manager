@@ -19,6 +19,7 @@ export const StyledMainWrapper = styled(StyledWrapper)<Props>`
   height: 100%;
   padding-left: ${sizes.navHeight};
   padding-top: ${sizes.navHeight};
+  overflow-x: hidden;
 `;
 
 StyledWrapper.defaultProps = {
