@@ -1,11 +1,12 @@
 import { Task } from 'shared/store/reducers/taskReducer';
 
-interface Card extends Task {
-  label: string;
+export type Card = {
+  id: string;
+  task: Task;
   draggable: boolean;
-  onEdit: Function;
+  onEdit: Function | null;
   onDelete: Function;
-}
+};
 
 class BoardController {
   todoCards: Card[] = [];
@@ -27,8 +28,8 @@ class BoardController {
 
   changeTaskToCard = (task: Task): Card => {
     const card: Card = {
-      ...task,
-      label: 'new',
+      id: task.id,
+      task,
       draggable: true,
       onEdit: this.onEdit,
       onDelete: this.onDelete,
@@ -54,17 +55,17 @@ class BoardController {
   };
 
   getBoard = () => {
-    const data = {
+    const board = {
       lanes: [
         {
-          id: 'lane1',
+          id: 'todo',
           type: 'todo',
           title: `ToDo  ${this.todoCards.length}`,
           label: '2/2',
           cards: [...this.todoCards],
         },
         {
-          id: 'lane2',
+          id: 'progress',
           type: 'progress',
           title: `In Progress  ${this.progressCards.length}`,
           label: '0/0',
@@ -72,7 +73,7 @@ class BoardController {
           cards: [...this.progressCards],
         },
         {
-          id: 'lane3',
+          id: 'done',
           type: 'done',
           title: `Done  ${this.doneCards.length}`,
           label: '0/0',
@@ -82,7 +83,7 @@ class BoardController {
       ],
     };
 
-    return data;
+    return board;
   };
 }
 

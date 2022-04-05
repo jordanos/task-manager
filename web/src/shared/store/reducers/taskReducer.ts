@@ -53,7 +53,15 @@ function taskReducer(
         ...state,
         tasks: state.tasks.map((task) => {
           if (task.id !== action.payload.id) return task;
-          return { ...action.payload };
+          return { ...task, ...action.payload };
+        }),
+      };
+    case 'MOVE_TASK':
+      return {
+        ...state,
+        tasks: state.tasks.map((task) => {
+          if (task.id !== action.payload.id) return task;
+          return { ...task, status: action.payload.status };
         }),
       };
     case 'DELETE_TASK':
