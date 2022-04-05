@@ -1,15 +1,15 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { Time } from 'shared/helpers/clock';
+import { NavHeader } from 'shared/store/reducers/appReducer';
 import StyledWrapper from '../Wrappers/Styles';
 import StyledNav from './styles';
 
 interface Props {
-  navHeader: any;
+  navHeader: NavHeader;
+  time: Time;
 }
 
-const time = { date: '15 dec 2021', time: '10:30' };
-
-const NavHeader: React.FC<Props> = ({ navHeader }) => {
+const NavUi: React.FC<Props> = ({ navHeader, time }) => {
   return (
     <StyledNav>
       <StyledWrapper direction="row">
@@ -25,15 +25,11 @@ const NavHeader: React.FC<Props> = ({ navHeader }) => {
       </StyledWrapper>
       {/* date */}
       <StyledWrapper style={{ fontSize: '14px' }}>
-        <div>{time.date}</div>
-        <div>{time.time}</div>
+        <div>{time.date.toDateString()}</div>
+        <div>{`${time.hour}:${time.minute}:${time.second} ${time.session}`}</div>
       </StyledWrapper>
     </StyledNav>
   );
 };
 
-const mapStateToProps = (state: any) => {
-  return { navHeader: state.app.navHeader };
-};
-
-export default connect(mapStateToProps)(NavHeader);
+export default NavUi;
