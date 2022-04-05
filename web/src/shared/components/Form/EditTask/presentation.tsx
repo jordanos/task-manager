@@ -6,6 +6,7 @@ import TextInput from 'shared/components/Form/TextInput';
 import StyledWrapper from 'shared/components/Wrappers/Styles';
 import { Task } from 'shared/store/reducers/taskReducer';
 import { colors } from 'shared/utils/Styles';
+import TextArea from '../TextArea';
 
 interface Props {
   task: Task;
@@ -38,15 +39,14 @@ const EditTaskUi: React.FC<Props> = ({ task, updateData, handleSubmit }) => {
         </TextInput>
       </StyledWrapper>
       <StyledWrapper align="start" className="form-row">
-        <TextInput
+        <TextArea
           placeholer="my new task"
           name="description"
           value={task.description}
           onChange={updateData}
-          type="text"
           error={null}>
           Description
-        </TextInput>
+        </TextArea>
       </StyledWrapper>
       <StyledWrapper
         direction="row"

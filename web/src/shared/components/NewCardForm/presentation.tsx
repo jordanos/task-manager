@@ -4,6 +4,7 @@ import { Task } from 'shared/store/reducers/taskReducer';
 import { colors } from 'shared/utils/Styles';
 import Button from '../Button';
 import Form from '../Form';
+import TextArea from '../Form/TextArea';
 import TextInput from '../Form/TextInput';
 import StyledWrapper from '../Wrappers/Styles';
 
@@ -24,7 +25,7 @@ const NewCardFormUi: React.FC<PropsInterface> = (props) => {
         background: colors.backgroundMedium,
         borderRadius: '10px',
       }}>
-      <StyledWrapper>
+      <StyledWrapper className="form-row">
         <TextInput
           placeholer="new task"
           name="title"
@@ -33,26 +34,25 @@ const NewCardFormUi: React.FC<PropsInterface> = (props) => {
           onChange={updateTask}>
           Title
         </TextInput>
-        <TextInput
+      </StyledWrapper>
+      <StyledWrapper className="form-row">
+        <TextArea
           placeholer="my new task"
           name="description"
-          type="text"
           value={task.description}
           onChange={updateTask}>
           Description
-        </TextInput>
-        <div
-          style={{
-            background: 'white',
-            marginTop: '10px',
-          }}>
+        </TextArea>
+      </StyledWrapper>
+      <StyledWrapper className="form-row">
+        <div style={{ background: `${colors.backgroundLightest}` }}>
           <DateTimePicker
             onChange={(value) => updateTask('date', value)}
             value={task.date}
           />
         </div>
       </StyledWrapper>
-      <StyledWrapper direction="row" style={{ padding: '1em 0' }}>
+      <StyledWrapper className="form-row" direction="row">
         <Button bg={colors.success} color="white" type="submit">
           Add
         </Button>
