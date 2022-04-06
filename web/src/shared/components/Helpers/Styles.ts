@@ -12,6 +12,13 @@ export const StyledTitle = styled.h4<TitleProps>`
   margin-bottom: 1em;
 `;
 
+export const StyledDesc = styled.div`
+  max-width: 200px;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+`;
+
 export const StyledCard = styled.div`
   width: 240px;
   height: 100px;

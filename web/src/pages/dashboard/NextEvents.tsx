@@ -1,51 +1,57 @@
 import React from 'react';
-import SimpleCard from 'shared/components/Helpers/SimpleCard';
-import Title from 'shared/components/Helpers/Title';
-import StyledWrapper from 'shared/components/Wrappers/Styles';
+import { connect } from 'react-redux';
+import { Task } from 'shared/store/reducers/taskReducer';
+import NextEventsUi from './NextEventsUi';
 
-const NextEvents: React.FC = () => {
+interface Props {
+  tasks: Task[];
+}
+
+const NextEvents: React.FC<Props> = ({ tasks }) => {
+  const getThisMonth = (): Task[] => {
+    const date = new Date();
+    const filteredTasks = tasks.filter(
+      (task) =>
+        task.status === 'todo' && task.date.getMonth() === date.getMonth()
+    );
+    const sorted = filteredTasks.sort((a, b) => {
+      if (a.date.getTime() > b.date.getTime()) return 1;
+      if (b.date.getTime() > a.date.getTime()) return -1;
+      return 0;
+    });
+    return sorted;
+  };
+
+  const thisMonthTasks = getThisMonth();
+
+  const getNextEvents = (): Task[] => {
+    return thisMonthTasks;
+  };
+  const getEventsThisMonth = (): Task[] => {
+    if (thisMonthTasks.length > 3) {
+      const randomlyPicked: Task[] = [];
+      let pickIndex = thisMonthTasks.length - 1;
+      // get three tasks randomly picked from this month tasks
+      for (let i = 0; i < 3; i += 1) {
+        randomlyPicked.push(thisMonthTasks[pickIndex]);
+        // divide by 2 to get equaly distant(by date) tasks
+        pickIndex = Math.floor(pickIndex / 2);
+      }
+      return randomlyPicked;
+    }
+    return thisMonthTasks;
+  };
+
   return (
-    <StyledWrapper
-      style={{ height: '100%' }}
-      align="flex-start"
-      justify="flex-start">
-      <Title>Next events</Title>
-      <StyledWrapper
-        style={{
-          width: `700px`,
-          marginBottom: '2em',
-        }}
-        direction="row"
-        justify="flex-start">
-        <SimpleCard style={{ marginLeft: '20px' }}>
-          <Title decoration="none">08/01 - 19:00 - 20:00</Title>
-          Sed vitae lobortis nulla, ut vulputate augue.
-        </SimpleCard>
-        <SimpleCard style={{ marginLeft: '20px' }}>
-          <Title decoration="none">08/01 - 19:00 - 20:00</Title>
-          Sed vitae lobortis nulla, ut vulputate augue.
-        </SimpleCard>
-      </StyledWrapper>
-
-      <Title>Events this month</Title>
-      <StyledWrapper
-        style={{
-          width: `700px`,
-          marginBottom: '2em',
-        }}
-        direction="row"
-        justify="flex-start">
-        <SimpleCard style={{ marginLeft: '20px' }}>
-          <Title decoration="none">08/01 - 19:00 - 20:00</Title>
-          Sed vitae lobortis nulla, ut vulputate augue.
-        </SimpleCard>
-        <SimpleCard style={{ marginLeft: '20px' }}>
-          <Title decoration="none">08/01 - 19:00 - 20:00</Title>
-          Sed vitae lobortis nulla, ut vulputate augue.
-        </SimpleCard>
-      </StyledWrapper>
-    </StyledWrapper>
+    <NextEventsUi
+      nextEvents={getNextEvents()}
+      eventsThisMonth={getEventsThisMonth()}
+    />
   );
 };
 
-export default NextEvents;
+const mapStateToProps = (state: any): { tasks: Task[] } => {
+  return { tasks: state.task.tasks };
+};
+
+export default connect(mapStateToProps)(NextEvents);
