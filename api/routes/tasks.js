@@ -21,9 +21,9 @@ const router = express.Router();
  *      type: object
  *      required:
  *        - title
- *        - desc
- *        - start
- *        - end
+ *        - description
+ *        - date
+ *        - assignedTo
  *      properties:
  *        id:
  *          type: String
@@ -31,20 +31,19 @@ const router = express.Router();
  *        title:
  *          type: string
  *          description: title of the task.
- *        desc:
+ *        description:
  *          type: string
  *          description: description of the task.
- *        start:
+ *        date:
  *          type: string
  *          format: date
  *          description: The start time of the task.
- *        end:
+ *        status:
  *          type: string
- *          format: date
- *          description: The end time of the task.
- *        isDone:
- *          type: boolean
- *          description: Status of task completion.
+ *          description: Status of task (todo | progress | done).
+ *        assignedTo:
+ *          type: string
+ *          description: user id that this task has been assigned to.
  *        createdAt:
  *          type: string
  *          format: date
@@ -54,10 +53,10 @@ const router = express.Router();
  *          description: Task owner/user id.
  *      example:
  *        title: Task
- *        desc: new task for today
- *        start: 12/12/22
- *        end: 12/12/22
- *        owner: 622de5fed3f42ebf99d1b5de
+ *        description: new task for today
+ *        date: 12/12/22
+ *        status: todo
+ *        assignedTo: 622de5fed3f42ebf99d1b5de
  */
 
 /**

@@ -1,10 +1,10 @@
 exports.taskSchema = {
   title: expect.any(String),
-  desc: expect.any(String),
-  start: expect.any(String),
-  end: expect.any(String),
+  description: expect.any(String),
+  date: expect.any(String),
+  status: expect.any(String),
+  assignedTo: expect.any(String),
   createdAt: expect.any(String),
-  isDone: expect.any(Boolean),
   owner: expect.any(String),
 };
 
