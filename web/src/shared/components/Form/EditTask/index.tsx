@@ -1,7 +1,7 @@
 import React, { FormEventHandler, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Task } from 'shared/store/reducers/taskReducer';
-import EditTaskUi from './presentation';
+import EditTaskUi from './EditTaskUi';
 
 interface Props {
   editableTask: Task;

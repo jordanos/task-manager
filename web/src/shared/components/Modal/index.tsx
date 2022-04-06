@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import ModalPresentation from './presentation';
+import ModalUi from './ModalUi';
 
 interface Props {
   toggleView: Function;
@@ -9,9 +9,9 @@ interface Props {
 
 const Modal: React.FC<Props> = ({ modal, toggleView, children }) => {
   return (
-    <ModalPresentation modal={modal} toggleView={toggleView}>
+    <ModalUi modal={modal} toggleView={toggleView}>
       {children}
-    </ModalPresentation>
+    </ModalUi>
   );
 };
 

@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import useCurrentTime from 'shared/hooks/useCurrentTime';
 import { NavHeader } from 'shared/store/reducers/appReducer';
-import NavUi from './presentation';
+import NavUi from './NavUi';
 
 interface Props {
   navHeader: NavHeader;

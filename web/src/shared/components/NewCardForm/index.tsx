@@ -1,6 +1,6 @@
 import React, { MouseEventHandler, useState } from 'react';
 import { Task } from 'shared/store/reducers/taskReducer';
-import NewCardFormUi from './presentation';
+import NewCardFormUi from './NewCardFormUi';
 
 interface PropsInterface {
   onCancel: MouseEventHandler;
