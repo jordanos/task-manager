@@ -5,6 +5,7 @@ import StyledWrapper from 'shared/components/Wrappers/Styles';
 import { Task } from 'shared/store/reducers/taskReducer';
 
 type Header = {
+  id: string;
   type: Task['status'];
   title: string;
 };
@@ -52,22 +53,27 @@ const DashboardHeader: React.FC<Props> = ({ tasks }) => {
 
     const headers = [
       {
+        id: 'dash-header1',
         type: 'todo' as const,
         title: formatHeaderText('ToDo', todoCount),
       },
       {
+        id: 'dash-header2',
         type: 'progress' as const,
         title: formatHeaderText('In progress', progressCount),
       },
       {
+        id: 'dash-header3',
         type: 'done' as const,
         title: formatHeaderText('Done today', doneTodayCount),
       },
       {
+        id: 'dash-header4',
         type: 'done' as const,
         title: formatHeaderText('Done this week', doneThisWeekCount),
       },
       {
+        id: 'dash-header5',
         type: 'done' as const,
         title: formatHeaderText('Done this month', doneThisMonthCount),
       },
@@ -82,7 +88,7 @@ const DashboardHeader: React.FC<Props> = ({ tasks }) => {
       justify="space-around">
       {getHeaders().map((header: Header) => (
         <LaneHeader
-          key={`${Date.now()}`}
+          key={header.id}
           type={header.type}
           title={header.title}
           background="white"
