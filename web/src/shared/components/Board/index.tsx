@@ -37,27 +37,22 @@ const CustomBoard: React.FC<PropsInterface> = (props) => {
   );
 
   return (
-    <>
-      {console.log('Rerender', tasks)}
-      {console.log('board', controller.getBoard())}
-
-      <Board
-        style={boardStyle}
-        data={controller.getBoard()}
-        components={components}
-        laneStyle={laneStyle}
-        editable
-        onCardMoveAcrossLanes={(
-          from: string,
-          to: string,
-          id: string,
-          index: number
-        ) => from !== to && moveTask({ id, status: to })}
-        onCardAdd={(task: Task) => {
-          addTask(task);
-        }}
-      />
-    </>
+    <Board
+      style={boardStyle}
+      data={controller.getBoard()}
+      components={components}
+      laneStyle={laneStyle}
+      editable
+      onCardMoveAcrossLanes={(
+        from: string,
+        to: string,
+        id: string,
+        index: number
+      ) => from !== to && moveTask({ id, status: to })}
+      onCardAdd={(task: Task) => {
+        addTask(task);
+      }}
+    />
   );
 };
 

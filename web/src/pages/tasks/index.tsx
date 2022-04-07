@@ -28,8 +28,9 @@ const Tasks: React.FC<Props> = ({ setNavHeader }) => {
       <Modal>
         <EditTask />
       </Modal>
-
-      <Loader component={<CustomBoard />} />
+      <Loader>
+        <CustomBoard />
+      </Loader>
     </>
   );
 };

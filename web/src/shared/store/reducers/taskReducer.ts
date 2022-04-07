@@ -14,18 +14,7 @@ interface TaskState {
 }
 
 const initialState: TaskState = {
-  tasks: [
-    {
-      id: `${Date.now()}`,
-      title: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit',
-      description: `Sed vitae lobortis nulla, ut vulputate augue. 
-      Nullam mollis non ante et consequat. Cras quis dapibus augue. 
-      Phasellus nec fermentum mauris. Aenean et eros ut erat gravida rhoncus a et velit.`,
-      date: new Date(),
-      status: 'todo',
-      assignedTo: 'myself',
-    },
-  ],
+  tasks: [],
   editableTask: {
     id: '',
     title: '',
@@ -38,11 +27,13 @@ const initialState: TaskState = {
 
 function taskReducer(
   state = initialState,
-  action: { type: string; payload: Task }
+  action: { type: string; payload: any }
 ) {
   switch (action.type) {
     case 'ADD_TASK':
       return { ...state, tasks: [...state.tasks, action.payload] };
+    case 'ADD_MANY_TASKS':
+      return { ...state, tasks: [...state.tasks, ...action.payload] };
     case 'PRE_EDIT':
       return {
         ...state,

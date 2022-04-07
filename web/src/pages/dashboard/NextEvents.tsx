@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Task } from 'shared/store/reducers/taskReducer';
 import NextEventsUi from './NextEventsUi';
@@ -7,14 +7,14 @@ interface Props {
   tasks: Task[];
 }
 
+const initTasks: Task[] = [];
+
 const NextEvents: React.FC<Props> = ({ tasks }) => {
-  const getThisMonth = (): Task[] => {
-    const date = new Date();
-    const filteredTasks = tasks.filter(
-      (task) =>
-        task.status === 'todo' && task.date.getMonth() === date.getMonth()
-    );
-    const sorted = filteredTasks.sort((a, b) => {
+  const [nextEvents, setNextEvents] = useState(initTasks);
+  const [eventsThisMonth, setEventsThisMonth] = useState(initTasks);
+
+  const sortTasks = (unsorted: Task[]): Task[] => {
+    const sorted = unsorted.sort((a, b) => {
       if (a.date.getTime() > b.date.getTime()) return 1;
       if (b.date.getTime() > a.date.getTime()) return -1;
       return 0;
@@ -22,12 +22,19 @@ const NextEvents: React.FC<Props> = ({ tasks }) => {
     return sorted;
   };
 
-  const thisMonthTasks = getThisMonth();
-
-  const getNextEvents = (): Task[] => {
-    return thisMonthTasks;
+  const getThisMonth = (): Task[] => {
+    const date = new Date();
+    const filteredTasks = tasks.filter(
+      (task) =>
+        task.status === 'todo' && task.date.getMonth() === date.getMonth()
+    );
+    const sorted = sortTasks(filteredTasks);
+    return sorted;
   };
+
   const getEventsThisMonth = (): Task[] => {
+    const thisMonthTasks = getThisMonth();
+
     if (thisMonthTasks.length > 3) {
       const randomlyPicked: Task[] = [];
       let pickIndex = thisMonthTasks.length - 1;
@@ -42,11 +49,13 @@ const NextEvents: React.FC<Props> = ({ tasks }) => {
     return thisMonthTasks;
   };
 
+  useEffect(() => {
+    setNextEvents(tasks);
+    setEventsThisMonth(getEventsThisMonth());
+  }, [tasks]);
+
   return (
-    <NextEventsUi
-      nextEvents={getNextEvents()}
-      eventsThisMonth={getEventsThisMonth()}
-    />
+    <NextEventsUi nextEvents={nextEvents} eventsThisMonth={eventsThisMonth} />
   );
 };
 

@@ -8,7 +8,7 @@ type ReqReturn = {
 };
 
 // This function servs as an adapter between axios methods and states
-const Request = (
+const useRequest = (
   method: 'get' | 'post' | 'put' | 'delete',
   url: string,
   reqData: any = null
@@ -25,22 +25,21 @@ const Request = (
           url,
           data: reqData,
           headers: {
-            Authorization:
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA0OGRkYTc1MzU1ZGYwZTU5ZWU1ZSIsImlhdCI6MTY0OTE2OTE3NSwiZXhwIjoyNTEzMDgyNzc1fQ.qdC9ScW-eM9d_h_L5L_1ESaAPrsjY-AIZ1CXvjNiWL0',
+            Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA0OGRkYTc1MzU1ZGYwZTU5ZWU1ZSIsImlhdCI6MTY0OTMwNzE5OCwiZXhwIjoyNTEzMjIwNzk4fQ.7RFSX85iGjMudsuRUNlljaqr8Cx0DuzVFkk1NsKm9V8`,
           },
         });
         setLoading(false);
         if (res.status >= 400) throw new Error(res.error);
-        setData(res.data);
+        setData(res.data.data);
       } catch (e: any) {
         setError(e);
       }
     };
 
     execute();
-  }, [method, url, reqData]);
+  }, []);
 
   return { loading, error, data };
 };
 
-export default Request;
+export default useRequest;

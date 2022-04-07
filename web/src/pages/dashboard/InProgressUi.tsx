@@ -9,7 +9,7 @@ interface Props {
 }
 
 const fallbackTask: Task = {
-  id: '',
+  id: 'fallback-progress',
   title: 'You have no tasks in this section',
   description:
     'Please add some tasks to this section in the tasks page, to see them show up in here.',
@@ -28,6 +28,7 @@ const InProgressUi: React.FC<Props> = ({ tasks }) => {
       {tasks.length > 0 ? (
         tasks.map((task) => (
           <CustomCard
+            key={task.id}
             onEdit={null}
             onClick={() => {}}
             onDelete={null}
@@ -36,6 +37,7 @@ const InProgressUi: React.FC<Props> = ({ tasks }) => {
         ))
       ) : (
         <CustomCard
+          key={fallbackTask.id}
           onEdit={null}
           onClick={() => {}}
           onDelete={null}

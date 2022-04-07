@@ -41,7 +41,10 @@ const DashboardHeader: React.FC<Props> = ({ tasks }) => {
             task.date.getMonth() === date.getMonth()
           ) {
             if (task.date.getDate() === date.getDate()) doneTodayCount += 1;
-            if (task.date.getMonth() === date.getMonth())
+            if (
+              task.date.getMonth() === date.getMonth() &&
+              task.date.getDate() <= date.getDate() + 7
+            )
               doneThisWeekCount += 1;
             doneThisMonthCount += 1;
           }
