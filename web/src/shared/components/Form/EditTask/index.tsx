@@ -1,5 +1,7 @@
-import React, { FormEventHandler, useEffect, useState } from 'react';
+import React, { FormEvent, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import HOST from 'shared/constants/config';
+import useMutate from 'shared/hooks/useMutate';
 import { Task } from 'shared/store/reducers/taskReducer';
 import EditTaskUi from './EditTaskUi';
 
@@ -18,18 +20,42 @@ const EditTask: React.FC<Props> = ({ editableTask, editTask, toggleView }) => {
 
   useEffect(() => setTask(editableTask), [editableTask]);
 
-  const handleSubmit: FormEventHandler = (e) => {
+  const { loading, error, data, mutate } = useMutate(
+    'put',
+    `${HOST}/tasks/${task.id}`
+  );
+
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
 
-    editTask(task);
-    toggleView();
+    mutate({
+      ...task,
+      assignedTo: '622de5fed3f42ebf99d1b5de',
+      date: task.date.toString(),
+    });
   };
+
+  useEffect(() => {
+    if (data) {
+      const newTask = {
+        id: data.id,
+        title: data.title,
+        description: data.description,
+        status: data.status,
+        date: new Date(data.date),
+        assignedTo: 'myself',
+      };
+      editTask(newTask);
+      toggleView();
+    }
+  }, [data]);
 
   return (
     <EditTaskUi
       task={task}
       updateData={updateData}
       handleSubmit={handleSubmit}
+      loading={loading}
     />
   );
 };

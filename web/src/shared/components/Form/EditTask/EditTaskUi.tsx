@@ -12,9 +12,11 @@ interface Props {
   task: Task;
   updateData: Function;
   handleSubmit: FormEventHandler;
+  loading: boolean;
 }
 
-const EditTaskUi: React.FC<Props> = ({ task, updateData, handleSubmit }) => {
+const EditTaskUi: React.FC<Props> = (props) => {
+  const { task, updateData, handleSubmit, loading } = props;
   return (
     <Form
       style={{
@@ -76,7 +78,8 @@ const EditTaskUi: React.FC<Props> = ({ task, updateData, handleSubmit }) => {
           bg={colors.backgroundDark}
           color="white"
           radius="20px"
-          type="submit">
+          type="submit"
+          loading={loading}>
           Save
         </Button>
       </StyledWrapper>

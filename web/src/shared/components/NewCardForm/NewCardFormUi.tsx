@@ -8,15 +8,16 @@ import TextArea from '../Form/TextArea';
 import TextInput from '../Form/TextInput';
 import StyledWrapper from '../Wrappers/Styles';
 
-interface PropsInterface {
+interface Props {
   task: Task;
   updateTask: Function;
   onCancel: MouseEventHandler;
   handleSubmit: FormEventHandler;
+  loading: boolean;
 }
 
-const NewCardFormUi: React.FC<PropsInterface> = (props) => {
-  const { task, updateTask, onCancel, handleSubmit } = props;
+const NewCardFormUi: React.FC<Props> = (props) => {
+  const { task, updateTask, onCancel, handleSubmit, loading } = props;
 
   return (
     <Form
@@ -53,13 +54,18 @@ const NewCardFormUi: React.FC<PropsInterface> = (props) => {
         </div>
       </StyledWrapper>
       <StyledWrapper className="form-row" direction="row">
-        <Button bg={colors.success} color="white" type="submit">
+        <Button
+          bg={colors.success}
+          color="white"
+          type="submit"
+          loading={loading}>
           Add
         </Button>
         <Button
           style={{ marginLeft: '10px' }}
           color={colors.danger}
-          onClick={onCancel}>
+          onClick={onCancel}
+          loading={false}>
           Cancel
         </Button>
       </StyledWrapper>

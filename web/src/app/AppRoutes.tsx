@@ -4,9 +4,9 @@ import Tasks from 'pages/tasks';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import useRequest from 'shared/adapters/request';
 import Navigation from 'shared/components/Navigation';
 import HOST from 'shared/constants/config';
+import useQuery from 'shared/hooks/useQuery';
 import { Task } from 'shared/store/reducers/taskReducer';
 
 interface Props {
@@ -14,13 +14,13 @@ interface Props {
 }
 
 const AppRoutes: React.FC<Props> = ({ addMany }) => {
-  const { loading, error, data } = useRequest('get', `${HOST}/tasks`, {
+  const { loading, error, data } = useQuery('get', `${HOST}/tasks`, {
     email: 'y23hree@gmail.com',
     password: '123456',
   });
+
   useEffect(() => {
     if (data) {
-      console.log('data', data);
       const newTasks: Task[] = [];
       data.forEach((task: any) => {
         newTasks.push({
