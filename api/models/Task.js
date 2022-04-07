@@ -6,21 +6,22 @@ const TaskSchema = new mongoose.Schema(
       type: String,
       required: [true, "Please provide task title"],
     },
-    desc: {
+    description: {
       type: String,
       required: [true, "Please provide task description"],
     },
-    start: {
+    date: {
       type: Date,
       required: [true, "Please provide start time"],
     },
-    end: {
-      type: Date,
-      required: [true, "Please provide end time"],
-    },
     status: {
       type: String,
-      default: false,
+      default: "todo",
+    },
+    assignedTo: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+      required: true,
     },
     createdAt: {
       type: Date,

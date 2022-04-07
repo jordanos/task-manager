@@ -20,6 +20,15 @@ export const StyledInput = styled.input<InputInterface>`
   border-radius: 2px;
 `;
 
+export const StyledArea = styled.textarea<InputInterface>`
+  width: ${(props) => props.width};
+  height: ${(props) => props.height};
+  background: white;
+  border: 1px solid #c1ccdd;
+  border-radius: 2px;
+  font-size: 0.75rem;
+`;
+
 export const StyledButton = styled.button`
   width: 105px;
   height: 28px;
@@ -40,4 +49,9 @@ export default StyledForm;
 StyledInput.defaultProps = {
   width: '300px',
   height: '32px',
+};
+
+StyledArea.defaultProps = {
+  width: '300px',
+  height: '80px',
 };

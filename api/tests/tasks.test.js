@@ -67,9 +67,8 @@ describe("Tasks API endpoint", () => {
       .post("/api/v1/tasks")
       .set("Authorization", token)
       .send({
-        desc: "lalala@xyz.com",
-        start: "",
-        end: "",
+        description: "lalala@xyz.com",
+        date: "",
         owner: "622ce7f6ba8305f08f59cebf",
       })
       .expect("Content-Type", /json/)

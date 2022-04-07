@@ -1,39 +1,21 @@
 import React from 'react';
-import CustomCard from 'shared/components/CustomCard';
-import Title from 'shared/components/Helpers/Title';
-import StyledWrapper from 'shared/components/Wrappers/Styles';
+import { connect } from 'react-redux';
+import { Task } from 'shared/store/reducers/taskReducer';
+import InProgressUi from './InProgressUi';
 
-const InProgress: React.FC = () => {
+interface Props {
+  tasks: Task[];
+}
+
+const InProgress: React.FC<Props> = ({ tasks }) => {
+  // const getProgress = (tasks: Task[]): tasks: Task[]=> {}
   return (
-    <StyledWrapper
-      style={{ height: '100%' }}
-      align="flex-start"
-      justify="flex-start">
-      <Title>Tasks in progress</Title>
-      <CustomCard
-        onEdit={null}
-        onClick={() => {}}
-        onDelete={null}
-        id="1"
-        description={`Sed vitae lobortis nulla, ut vulputate augue. 
-        Nullam mollis non ante et consequat. Cras quis dapibus augue. 
-        Phasellus nec fermentum mauris. Aenean et eros ut erat gravida rhoncus a et velit.`}
-        title="New Task"
-        date={new Date()}
-      />
-      <CustomCard
-        onEdit={null}
-        onClick={() => {}}
-        onDelete={null}
-        id="1"
-        description={`Sed vitae lobortis nulla, ut vulputate augue. 
-        Nullam mollis non ante et consequat. Cras quis dapibus augue. 
-        Phasellus nec fermentum mauris. Aenean et eros ut erat gravida rhoncus a et velit.`}
-        title="New Task"
-        date={new Date()}
-      />
-    </StyledWrapper>
+    <InProgressUi tasks={tasks.filter((task) => task.status === 'progress')} />
   );
 };
 
-export default InProgress;
+const mapStateToProps = (state: any): { tasks: Task[] } => {
+  return { tasks: state.task.tasks };
+};
+
+export default connect(mapStateToProps)(InProgress);

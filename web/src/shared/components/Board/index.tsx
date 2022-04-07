@@ -11,10 +11,11 @@ interface PropsInterface {
   preEdit: Function;
   toggleView: Function;
   deleteTask: Function;
+  moveTask: Function;
 }
 
 const CustomBoard: React.FC<PropsInterface> = (props) => {
-  const { tasks, addTask, preEdit, toggleView, deleteTask } = props;
+  const { tasks, addTask, preEdit, toggleView, deleteTask, moveTask } = props;
 
   const onEdit = (task: Task) => {
     preEdit(task);
@@ -42,8 +43,14 @@ const CustomBoard: React.FC<PropsInterface> = (props) => {
       components={components}
       laneStyle={laneStyle}
       editable
+      onCardMoveAcrossLanes={(
+        from: string,
+        to: string,
+        id: string,
+        index: number
+      ) => from !== to && moveTask({ id, status: to })}
       onCardAdd={(task: Task) => {
-        addTask({ ...task, assignedTo: 'myself' });
+        addTask(task);
       }}
     />
   );
@@ -59,6 +66,8 @@ const mapDispatchToProps = (dispatch: any) => {
     addTask: (payload: Task) => dispatch({ type: 'ADD_TASK', payload }),
     editTask: (payload: any) => dispatch({ type: 'EDIT_TASK', payload }),
     preEdit: (payload: any) => dispatch({ type: 'PRE_EDIT', payload }),
+    moveTask: (payload: { id: string; status: Task['status'] }) =>
+      dispatch({ type: 'MOVE_TASK', payload }),
     deleteTask: (payload: any) => dispatch({ type: 'DELETE_TASK', payload }),
   };
 };

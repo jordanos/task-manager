@@ -7,11 +7,7 @@ interface Props {
   modal: any;
 }
 
-const ModalPresentation: React.FC<Props> = ({
-  modal,
-  toggleView,
-  children,
-}) => {
+const ModalUi: React.FC<Props> = ({ modal, toggleView, children }) => {
   return (
     <>
       {/* modal background */}
@@ -36,4 +32,4 @@ const ModalPresentation: React.FC<Props> = ({
   );
 };
 
-export default ModalPresentation;
+export default ModalUi;

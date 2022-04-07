@@ -9,16 +9,17 @@ import { sizes } from 'shared/utils/Styles';
 import EventsWeek from './EventsWeek';
 
 interface Props {
-  dispatch: any;
+  setNavHeader: Function;
 }
 
-const Events: React.FC<Props> = ({ dispatch }) => {
-  const payload = {
-    title: 'Events',
-    icon: EventsIcon,
-  };
-  dispatch.setNavHeader(payload);
-  useEffect(() => {}, []);
+const Events: React.FC<Props> = ({ setNavHeader }) => {
+  useEffect(() => {
+    const payload = {
+      title: 'Events',
+      icon: EventsIcon,
+    };
+    setNavHeader(payload);
+  }, []);
 
   return (
     <StyledMainWrapper
@@ -40,12 +41,10 @@ const mapStateToProps = (state: any) => {
   return {};
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: any): { setNavHeader: Function } => {
   return {
-    dispatch: {
-      setNavHeader: (payload: NavHeader) =>
-        dispatch({ type: 'SET_NAV_HEADER', payload }),
-    },
+    setNavHeader: (payload: NavHeader) =>
+      dispatch({ type: 'SET_NAV_HEADER', payload }),
   };
 };
 

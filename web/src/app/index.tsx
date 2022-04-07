@@ -1,15 +1,19 @@
-import React from 'react';
-import AppRoutes from './AppRoutes';
+import React, { lazy } from 'react';
+import Loader from 'shared/components/Loader';
 import BaseStyles from './BaseStyles';
 import './fontStyles.css';
 import NormalizeStyles from './NormalizeStyles';
+
+const AppRoutes = lazy(() => import('./AppRoutes'));
 
 const App: React.FC = () => {
   return (
     <>
       <NormalizeStyles />
       <BaseStyles />
-      <AppRoutes />
+      <Loader>
+        <AppRoutes />
+      </Loader>
     </>
   );
 };

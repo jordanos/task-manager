@@ -20,12 +20,8 @@ export const Loading = () => {
   );
 };
 
-interface Props {
-  component: any;
-}
-
-const Loader: React.FC<Props> = ({ component }) => {
-  return <Suspense fallback={<Loading />}>{component}</Suspense>;
+const Loader: React.FC = ({ children }) => {
+  return <Suspense fallback={<Loading />}>{children}</Suspense>;
 };
 
 export default Loader;

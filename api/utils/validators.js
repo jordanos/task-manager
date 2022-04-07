@@ -9,10 +9,10 @@ const userSchema = Joi.object({
 
 const taskSchema = Joi.object({
   title: Joi.string().required(),
-  desc: Joi.string().required(),
-  start: Joi.date().required(),
-  end: Joi.date().required(),
-  owner: Joi.string().required(),
+  description: Joi.string().required(),
+  date: Joi.date().required(),
+  status: Joi.string().required(),
+  assignedTo: Joi.string().required(),
 });
 
 const adminSchema = Joi.object({
