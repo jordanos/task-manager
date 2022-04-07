@@ -1,64 +1,93 @@
-import React from 'react';
-import StyledWrapper from '../Wrappers/Styles';
-import PrevNext from './Header';
-import {
-  CalendarWrapper,
-  StyledCalendar,
-  StyledDay,
-  StyledHeader,
-} from './Styles';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
+import { Task } from 'shared/store/reducers/taskReducer';
+import CalendarUi from './CalendarUi';
 
-interface DayInterface {
-  day: number;
-  active: boolean;
-  header?: string | undefined;
+export type Day = {
+  events: number;
+  id: number;
+};
+
+const months = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
+
+const initDays: Day[] = new Array(35).fill({ events: 0, id: Date.now() });
+
+interface Props {
+  tasks: Task[];
 }
 
-const DayCard: React.FC<DayInterface> = ({ header, day, active }) => {
+const Calendar: React.FC<Props> = ({ tasks }) => {
+  const [days, setDays] = useState(initDays);
+  const [month, setMonth] = useState(new Date().getMonth());
+
+  const updateDays = () => {
+    const filteredTasks = tasks.filter(
+      (task) => task.status === 'todo' && task.date.getMonth() === month
+    );
+
+    const newDays = [...initDays];
+    filteredTasks.forEach((task) => {
+      newDays[task.date.getDate() - 1] = {
+        ...newDays[task.date.getDate() - 1],
+        events: newDays[task.date.getDate() - 1].events + 1,
+      };
+    });
+
+    setDays(newDays);
+  };
+
+  useEffect(() => updateDays(), [month]);
+
+  const prevNext = (comand: string): void => {
+    switch (comand) {
+      case 'prev':
+        if (month === 0) {
+          setMonth(11);
+          return;
+        }
+        setMonth((prevValue) => prevValue - 1);
+        return;
+      case 'next':
+        if (month === 11) {
+          setMonth(0);
+          return;
+        }
+        setMonth((prevValue) => prevValue + 1);
+        return;
+      default:
+        console.log('Unknown comand');
+    }
+  };
+
   return (
-    <StyledDay active={active} header={header}>
-      {header && header}
-      {!header && day}
-    </StyledDay>
+    <CalendarUi
+      month={months[month]}
+      days={days}
+      onNext={() => prevNext('next')}
+      onPrev={() => prevNext('prev')}
+      onClick={(d: number) => {
+        alert('feature in development');
+      }}
+    />
   );
 };
 
-const Calendar: React.FC = () => {
-  const days = Array(35).fill(0);
-  const daysHeader = [
-    'Monday',
-    'Tuesday',
-    'Wednsday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-    'Sunday',
-  ];
-  return (
-    <StyledCalendar>
-      <StyledWrapper align="flex-start" justify="flex-start">
-        {/* whole calendar */}
-
-        <StyledHeader>
-          March 31
-          <PrevNext onClickHandler={() => {}} />
-        </StyledHeader>
-
-        <CalendarWrapper>
-          {daysHeader.map((day) => (
-            <DayCard header={day} active day={0} />
-          ))}
-          {days.map((item, i) => (
-            <DayCard day={i + 1} active={i + 1 <= 31} />
-          ))}
-        </CalendarWrapper>
-      </StyledWrapper>
-    </StyledCalendar>
-  );
+// redux states
+const mapStateToProps = (state: any) => {
+  return { tasks: state.task.tasks };
 };
 
-DayCard.defaultProps = {
-  header: undefined,
-};
-
-export default Calendar;
+export default connect(mapStateToProps)(Calendar);

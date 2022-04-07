@@ -1,5 +1,7 @@
 import React from 'react';
-import SimpleCard from 'shared/components/Helpers/SimpleCard';
+import SimpleCard, {
+  EventsFallback,
+} from 'shared/components/Helpers/SimpleCard';
 import { StyledDesc } from 'shared/components/Helpers/Styles';
 import Title from 'shared/components/Helpers/Title';
 import StyledWrapper from 'shared/components/Wrappers/Styles';
@@ -9,17 +11,6 @@ interface Props {
   nextEvents: Task[];
   eventsThisMonth: Task[];
 }
-
-const EventsFallback: React.FC = () => {
-  return (
-    <SimpleCard style={{ marginLeft: '20px' }}>
-      <Title decoration="none">You have got no events for this period</Title>
-      <StyledDesc>
-        Please consider adding tasks(todo items) using the tasks page.
-      </StyledDesc>
-    </SimpleCard>
-  );
-};
 
 const NextEventsUi: React.FC<Props> = ({ nextEvents, eventsThisMonth }) => {
   return (

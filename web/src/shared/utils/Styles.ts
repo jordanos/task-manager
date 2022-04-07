@@ -61,6 +61,7 @@ export const sizes = {
   cardWidth: '350px',
   navHeight: '56px',
   dashboardProgressSize: '490px',
+  calendarDayWidth: '114px',
 };
 
 export const zIndexValues = {

@@ -1,9 +1,8 @@
-import { colors, font } from 'shared/utils/Styles';
-import styled, { css } from 'styled-components';
+import { colors, font, sizes } from 'shared/utils/Styles';
+import styled from 'styled-components';
 
 interface PropsDay {
   active: boolean;
-  header?: string;
 }
 
 export const StyledCalendar = styled.div`
@@ -13,25 +12,16 @@ export const StyledCalendar = styled.div`
 `;
 
 export const StyledDay = styled.div<PropsDay>`
-  width: 114px;
-  ${(props) =>
-    props.header
-      ? css`
-          height: 20px;
-          color: black;
-          background: transparent;
-        `
-      : css`
-          height: 90px;
-          color: ${props.active ? 'black' : colors.textLight};
-          background: ${colors.backgroundLightest};
-          border: 1px solid #e7e8ea;
-          box-sizing: border-box;
-          transition: all ease-in 200ms;
-          &:hover {
-            background: ${colors.backgroundLight};
-          }
-        `}
+  width: ${sizes.calendarDayWidth};
+  height: 90px;
+  color: ${(props) => (props.active ? 'black' : colors.textLight)};
+  background: ${colors.backgroundLightest};
+  border: 1px solid #e7e8ea;
+  box-sizing: border-box;
+  transition: all ease-in 200ms;
+  &:hover {
+    background: ${colors.backgroundLight};
+  }
 `;
 
 export const StyledHeader = styled.div`

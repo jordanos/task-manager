@@ -1,25 +1,34 @@
 import React from 'react';
-import SimpleCard from 'shared/components/Helpers/SimpleCard';
-import Title from 'shared/components/Helpers/Title';
-import StyledWrapper from 'shared/components/Wrappers/Styles';
+import { connect } from 'react-redux';
+import { Task } from 'shared/store/reducers/taskReducer';
+import EventsWeekUi from './EventsWeekUi';
 
-const EventsWeek: React.FC = () => {
-  return (
-    <StyledWrapper
-      style={{ height: '100%' }}
-      align="flex-start"
-      justify="flex-start">
-      <Title decoration="none">Events this week</Title>
-      <SimpleCard style={{ marginBottom: '20px' }}>
-        <Title decoration="none">08/01 - 19:00 - 20:00</Title>
-        Sed vitae lobortis nulla, ut vulputate augue.
-      </SimpleCard>
-      <SimpleCard style={{ marginBottom: '20px' }}>
-        <Title decoration="none">08/01 - 19:00 - 20:00</Title>
-        Sed vitae lobortis nulla, ut vulputate augue.
-      </SimpleCard>
-    </StyledWrapper>
-  );
+interface Props {
+  tasks: Task[];
+}
+
+const EventsWeek: React.FC<Props> = ({ tasks }) => {
+  const getThisWeek = (): Task[] => {
+    const date = new Date();
+    const filteredTasks = tasks.filter(
+      (task) =>
+        task.status === 'todo' &&
+        task.date.getMonth() === date.getMonth() &&
+        task.date.getDate() - date.getDate() < 7
+    );
+    const sorted = filteredTasks.sort((a, b) => {
+      if (a.date.getTime() > b.date.getTime()) return 1;
+      if (b.date.getTime() > a.date.getTime()) return -1;
+      return 0;
+    });
+    return sorted;
+  };
+
+  return <EventsWeekUi eventsThisWeek={getThisWeek().reverse()} />;
 };
 
-export default EventsWeek;
+const mapStateToProps = (state: any): { tasks: Task[] } => {
+  return { tasks: state.task.tasks };
+};
+
+export default connect(mapStateToProps)(EventsWeek);
