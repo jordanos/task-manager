@@ -17,6 +17,10 @@ export const StyledCard = styled.div`
   & > div {
     margin-bottom: 10px;
   }
+
+  &:hover {
+    background: ${mixin.darken(colors.backgroundLightest, 0.02)};
+  }
 `;
 
 export const StyledTitle = styled.div`

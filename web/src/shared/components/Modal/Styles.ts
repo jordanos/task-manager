@@ -5,7 +5,7 @@ interface Props {
   active: boolean;
 }
 
-const StyledContainer = styled.div<Props>`
+const StyledModal = styled.div<Props>`
   width: 0;
   position: fixed;
   top: 0;
@@ -19,4 +19,4 @@ const StyledContainer = styled.div<Props>`
     props.active && `width: 100%; opacity: 1; z-index: ${zIndexValues.modal};`}
 `;
 
-export default StyledContainer;
+export default StyledModal;

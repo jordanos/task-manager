@@ -1,4 +1,5 @@
 import React, { MouseEventHandler } from 'react';
+import Spinner from '../Spinner';
 import StyledButton from './Styles';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
   padding?: string;
   style?: any;
   type?: 'button' | 'submit' | 'reset';
+  loading: boolean;
 }
 
 const Button: React.FC<Props> = ({
@@ -19,18 +21,20 @@ const Button: React.FC<Props> = ({
   style,
   type,
   padding,
+  loading,
   children,
 }) => {
   return (
     <StyledButton
+      disabled={loading}
       type={type}
       onClick={onClick}
-      bg={bg}
+      bg={loading ? 'transparent' : bg}
       color={color}
       radius={radius}
       padding={padding}
       style={style}>
-      {children}
+      {loading ? <Spinner size={24} /> : children}
     </StyledButton>
   );
 };

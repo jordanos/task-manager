@@ -5,6 +5,7 @@ import './fontStyles.css';
 import NormalizeStyles from './NormalizeStyles';
 
 const AppRoutes = lazy(() => import('./AppRoutes'));
+const Init = lazy(() => import('./Init'));
 
 const App: React.FC = () => {
   return (
@@ -12,6 +13,7 @@ const App: React.FC = () => {
       <NormalizeStyles />
       <BaseStyles />
       <Loader>
+        <Init />
         <AppRoutes />
       </Loader>
     </>

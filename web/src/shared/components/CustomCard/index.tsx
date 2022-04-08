@@ -1,15 +1,11 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { MouseEventHandler } from 'react';
-import ReactTooltip from 'react-tooltip';
-import EditIcon from 'shared/assets/icons/EditIcon.';
-import PersonIcon from 'shared/assets/icons/PersonIcon';
+import React, { MouseEventHandler, useEffect } from 'react';
+import HOST from 'shared/constants/config';
+import useMutate from 'shared/hooks/useMutate';
 import { Task } from 'shared/store/reducers/taskReducer';
-import { colors } from 'shared/utils/Styles';
-import Button from '../Button';
-import StyledWrapper from '../Wrappers/Styles';
-import { StyledCard, StyledDesc, StyledTitle } from './Styles';
+import CustomCardUi from './CustomCardUi';
 
 interface Props {
   onEdit: Function | null;
@@ -21,56 +17,35 @@ interface Props {
 const CustomCard: React.FC<Props> = (props) => {
   const { onEdit, onClick, onDelete, task } = props;
 
+  const { loading, error, data, mutate } = useMutate('delete', ``);
+
+  const handleDelete = () => {
+    mutate(
+      {
+        ...task,
+        assignedTo: '622de5fed3f42ebf99d1b5de',
+        date: task.date.toString(),
+      },
+      `${HOST}/tasks/${task.id}`
+    );
+  };
+
+  useEffect(() => {
+    if (data) {
+      if (onDelete) onDelete(task);
+    }
+  }, [data]);
+
   return (
     <>
       {task && (
-        <div data-id={task.id} onClick={onClick}>
-          <StyledCard>
-            {onDelete ? (
-              <StyledWrapper direction="row" justify="space-between">
-                <StyledTitle>{task.title}</StyledTitle>
-                <Button
-                  onClick={() => onDelete(task)}
-                  bg={colors.backgroundDark}
-                  color="white"
-                  radius="100px"
-                  padding="0.1em 0.4em"
-                  style={{
-                    fontSize: '14px',
-                  }}>
-                  x
-                </Button>
-              </StyledWrapper>
-            ) : (
-              <StyledTitle>{task.title}</StyledTitle>
-            )}
-            <StyledDesc>{task.description}</StyledDesc>
-            <StyledWrapper direction="row" justify="space-between">
-              <StyledTitle>{task.date.toDateString()}</StyledTitle>
-              <StyledWrapper direction="row" justify="space-between">
-                <StyledWrapper
-                  direction="row"
-                  justify="space-around"
-                  style={{}}>
-                  <div data-tip data-for="person-tip">
-                    <PersonIcon />
-                  </div>
-                  <ReactTooltip id="person-tip" place="top" effect="solid">
-                    {task.assignedTo}
-                  </ReactTooltip>
-
-                  {onEdit && (
-                    <div
-                      onClick={() => onEdit(task)}
-                      style={{ marginLeft: '20px' }}>
-                      <EditIcon />
-                    </div>
-                  )}
-                </StyledWrapper>
-              </StyledWrapper>
-            </StyledWrapper>
-          </StyledCard>
-        </div>
+        <CustomCardUi
+          onEdit={onEdit}
+          onDelete={handleDelete}
+          onClick={onClick}
+          task={task}
+          loading={loading}
+        />
       )}
     </>
   );

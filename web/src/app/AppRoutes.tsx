@@ -1,41 +1,12 @@
 import Dashboard from 'pages/dashboard';
 import Events from 'pages/events';
 import Tasks from 'pages/tasks';
-import React, { useEffect } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import useRequest from 'shared/adapters/request';
+import 'react-toastify/dist/ReactToastify.css';
 import Navigation from 'shared/components/Navigation';
-import HOST from 'shared/constants/config';
-import { Task } from 'shared/store/reducers/taskReducer';
 
-interface Props {
-  addMany: Function;
-}
-
-const AppRoutes: React.FC<Props> = ({ addMany }) => {
-  const { loading, error, data } = useRequest('get', `${HOST}/tasks`, {
-    email: 'y23hree@gmail.com',
-    password: '123456',
-  });
-  useEffect(() => {
-    if (data) {
-      console.log('data', data);
-      const newTasks: Task[] = [];
-      data.forEach((task: any) => {
-        newTasks.push({
-          id: task.id,
-          title: task.title,
-          description: task.description,
-          date: new Date(task.date),
-          status: task.status,
-          assignedTo: 'myself',
-        });
-      });
-      addMany(newTasks);
-    }
-  }, [data]);
-
+const AppRoutes: React.FC = () => {
   return (
     <Router>
       <Navigation />
@@ -49,13 +20,4 @@ const AppRoutes: React.FC<Props> = ({ addMany }) => {
   );
 };
 
-const mapStateToProps = () => {
-  return {};
-};
-const mapDispatchToProps = (dispatch: any) => {
-  return {
-    addMany: (payload: Task[]) => dispatch({ type: 'ADD_MANY_TASKS', payload }),
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(AppRoutes);
+export default AppRoutes;
