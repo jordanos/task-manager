@@ -3,6 +3,7 @@ import Spinner from '../Spinner';
 import StyledButton from './Styles';
 
 interface Props {
+  outline?: boolean;
   bg?: string;
   color?: string;
   radius?: string;
@@ -14,6 +15,7 @@ interface Props {
 }
 
 const Button: React.FC<Props> = ({
+  outline,
   bg,
   color,
   radius,
@@ -26,6 +28,7 @@ const Button: React.FC<Props> = ({
 }) => {
   return (
     <StyledButton
+      outline={outline}
       disabled={loading}
       type={type}
       onClick={onClick}
@@ -40,6 +43,7 @@ const Button: React.FC<Props> = ({
 };
 
 Button.defaultProps = {
+  outline: false,
   bg: 'white',
   color: 'black',
   radius: '5px',

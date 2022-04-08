@@ -1,8 +1,9 @@
-import React, { useEffect } from 'react';
-import HOST from 'shared/constants/config';
+import React, { MouseEventHandler } from 'react';
+import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { Time } from 'shared/helpers/clock';
-import useMutate from 'shared/hooks/useMutate';
 import { NavHeader } from 'shared/store/reducers/appReducer';
+import { colors } from 'shared/utils/Styles';
 import Button from '../Button';
 import StyledWrapper from '../Wrappers/Styles';
 import StyledNav from './styles';
@@ -10,25 +11,16 @@ import StyledNav from './styles';
 interface Props {
   navHeader: NavHeader;
   time: Time;
+  user: any;
 }
 
-const NavUi: React.FC<Props> = ({ navHeader, time }) => {
-  const { loading, error, data, mutate } = useMutate(
-    'post',
-    `${HOST}/auth/login`
-  );
+const NavUi: React.FC<Props> = (props) => {
+  const { navHeader, time, user } = props;
+  const navigate = useNavigate();
 
-  useEffect(() => {
-    if (loading) {
-      console.log('loading');
-    }
-    if (error) {
-      console.log(error);
-    }
-    if (data) {
-      console.log(data);
-    }
-  }, [loading, error, data]);
+  const handleClick: MouseEventHandler = () => {
+    navigate('/login');
+  };
 
   return (
     <StyledNav>
@@ -43,23 +35,27 @@ const NavUi: React.FC<Props> = ({ navHeader, time }) => {
           {navHeader.title}
         </div>
       </StyledWrapper>
-      {/* date */}
-      <Button
-        onClick={() =>
-          mutate({
-            email: 'y23hree@gmail.com',
-            password: '123456',
-          })
-        }
-        loading={loading}>
-        Login
-      </Button>
-      <StyledWrapper style={{ fontSize: '14px' }}>
-        <div>{time.date.toDateString()}</div>
-        <div>{`${time.hour}:${time.minute}:${time.second} ${time.session}`}</div>
+      <StyledWrapper direction="row">
+        <Button
+          outline
+          color={colors.primary}
+          bg={colors.borderLightest}
+          onClick={handleClick}
+          loading={false}>
+          {user.token && user.token !== '' ? 'Logout' : 'Login'}
+        </Button>
+
+        <StyledWrapper style={{ marginLeft: '2em', fontSize: '14px' }}>
+          <div>{time.date.toDateString()}</div>
+          <div>{`${time.hour}:${time.minute}:${time.second} ${time.session}`}</div>
+        </StyledWrapper>
       </StyledWrapper>
     </StyledNav>
   );
 };
 
-export default NavUi;
+const mapStateToProps = (state: any) => {
+  return { user: state.user };
+};
+
+export default connect(mapStateToProps)(NavUi);

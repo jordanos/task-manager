@@ -4,6 +4,7 @@ import DashboardIcon from 'shared/assets/icons/DashboardIcon';
 /* eslint-disable @typescript-eslint/default-param-last */
 type ModalType = {
   active: boolean;
+  modalType: 'edit' | 'auth';
 };
 
 export type NavHeader = {
@@ -25,6 +26,7 @@ interface AppState {
 const initialState: AppState = {
   modal: {
     active: false,
+    modalType: 'edit',
   },
   navHeader: {
     title: '',

@@ -19,7 +19,7 @@ export const StyledCard = styled.div`
   }
 
   &:hover {
-    background: ${mixin.darken(colors.backgroundLightest, 0.02)};
+    background: ${mixin.lighten(colors.backgroundMedium, 0.04)};
   }
 `;
 

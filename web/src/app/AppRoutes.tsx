@@ -1,3 +1,5 @@
+import Login from 'pages/auth/Login';
+import Register from 'pages/auth/Register';
 import Dashboard from 'pages/dashboard';
 import Events from 'pages/events';
 import Tasks from 'pages/tasks';
@@ -14,6 +16,8 @@ const AppRoutes: React.FC = () => {
       <Routes>
         <Route path="/events" element={<Events />} />
         <Route path="/tasks" element={<Tasks />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
         <Route path="*" element={<Dashboard />} />
       </Routes>
     </Router>
