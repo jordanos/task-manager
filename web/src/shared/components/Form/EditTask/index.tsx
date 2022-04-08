@@ -1,6 +1,7 @@
 import React, { FormEvent, useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import HOST from 'shared/constants/config';
+import useError from 'shared/hooks/useError';
 import useMutate from 'shared/hooks/useMutate';
 import { Task } from 'shared/store/reducers/taskReducer';
 import EditTaskUi from './EditTaskUi';
@@ -9,9 +10,12 @@ interface Props {
   editableTask: Task;
   editTask: Function;
   toggleView: Function;
+  setError: Function;
 }
 
-const EditTask: React.FC<Props> = ({ editableTask, editTask, toggleView }) => {
+const EditTask: React.FC<Props> = (props) => {
+  const { editableTask, editTask, toggleView, setError } = props;
+
   const [task, setTask] = useState(editableTask);
 
   const updateData = (field: string, value: any) => {
@@ -35,15 +39,13 @@ const EditTask: React.FC<Props> = ({ editableTask, editTask, toggleView }) => {
     });
   };
 
+  useError(error, setError);
+
   useEffect(() => {
     if (data) {
       const newTask = {
-        id: data.id,
-        title: data.title,
-        description: data.description,
-        status: data.status,
+        ...data,
         date: new Date(data.date),
-        assignedTo: 'myself',
       };
       editTask(newTask);
       toggleView();
@@ -68,6 +70,7 @@ const mapDispatchToProps = (dispatch: any) => {
   return {
     toggleView: () => dispatch({ type: 'TOGGLE_MODAL_VIEW', payload: {} }),
     editTask: (payload: any) => dispatch({ type: 'EDIT_TASK', payload }),
+    setError: (payload: any) => dispatch({ type: 'SET_ERROR', payload }),
   };
 };
 

@@ -38,7 +38,9 @@ const TextInput: React.FC<InputInterface> = ({
         width={width}
         placeholder={placeholer}
       />
-      {error && <div style={{ color: 'red', fontSize: '12px' }}>{error}</div>}
+      {error !== '' && (
+        <div style={{ color: 'red', fontSize: '12px' }}>{error}</div>
+      )}
     </StyledWrapper>
   );
 };

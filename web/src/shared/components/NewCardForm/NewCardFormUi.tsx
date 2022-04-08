@@ -10,6 +10,7 @@ import StyledWrapper from '../Wrappers/Styles';
 
 interface Props {
   task: Task;
+  error: Task;
   updateTask: Function;
   onCancel: MouseEventHandler;
   handleSubmit: FormEventHandler;
@@ -17,7 +18,7 @@ interface Props {
 }
 
 const NewCardFormUi: React.FC<Props> = (props) => {
-  const { task, updateTask, onCancel, handleSubmit, loading } = props;
+  const { task, updateTask, onCancel, handleSubmit, loading, error } = props;
 
   return (
     <Form
@@ -32,7 +33,8 @@ const NewCardFormUi: React.FC<Props> = (props) => {
           name="title"
           type="text"
           value={task.title}
-          onChange={updateTask}>
+          onChange={updateTask}
+          error={error.title}>
           Title
         </TextInput>
       </StyledWrapper>
@@ -41,7 +43,8 @@ const NewCardFormUi: React.FC<Props> = (props) => {
           placeholer="my new task"
           name="description"
           value={task.description}
-          onChange={updateTask}>
+          onChange={updateTask}
+          error={error.description}>
           Description
         </TextArea>
       </StyledWrapper>

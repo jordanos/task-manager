@@ -33,7 +33,7 @@ function taskReducer(
     case 'ADD_TASK':
       return { ...state, tasks: [...state.tasks, action.payload] };
     case 'ADD_MANY_TASKS':
-      return { ...state, tasks: [...state.tasks, ...action.payload] };
+      return { ...state, tasks: action.payload };
     case 'PRE_EDIT':
       return {
         ...state,

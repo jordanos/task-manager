@@ -29,12 +29,12 @@ const Button: React.FC<Props> = ({
       disabled={loading}
       type={type}
       onClick={onClick}
-      bg={bg}
+      bg={loading ? 'transparent' : bg}
       color={color}
       radius={radius}
       padding={padding}
       style={style}>
-      {loading ? <Spinner /> : children}
+      {loading ? <Spinner size={24} /> : children}
     </StyledButton>
   );
 };

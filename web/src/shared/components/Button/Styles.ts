@@ -9,6 +9,7 @@ interface Props {
 }
 
 const StyledButton = styled.button<Props>`
+  max-height: 2em;
   background: ${(props) => props.bg};
   color: ${(props) => props.color};
   border-radius: ${(props) => props.radius};

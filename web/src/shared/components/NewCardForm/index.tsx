@@ -25,6 +25,7 @@ const initTask: Task = {
 
 const NewCardForm: React.FC<PropsInterface> = ({ onCancel, onAdd }) => {
   const [task, setTask] = useState(initTask);
+  const [inputError, setInputError] = useState(initTask);
 
   const updateTask = (field: string, value: any) => {
     setTask((prevState) => ({ ...prevState, [field]: value }));
@@ -33,6 +34,17 @@ const NewCardForm: React.FC<PropsInterface> = ({ onCancel, onAdd }) => {
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
+    if (task.title === '') {
+      setInputError((prev) => ({ ...prev, title: 'title is required' }));
+      return;
+    }
+    if (task.description === '') {
+      setInputError((prev) => ({
+        ...prev,
+        description: 'description is required',
+      }));
+      return;
+    }
 
     mutate({
       ...task,
@@ -44,12 +56,8 @@ const NewCardForm: React.FC<PropsInterface> = ({ onCancel, onAdd }) => {
   useEffect(() => {
     if (data) {
       onAdd({
-        id: data.id,
-        title: data.title,
-        description: data.deacription,
-        status: data.status,
+        ...data,
         date: new Date(data.date),
-        assignedTo: 'myself',
       });
     }
   }, [data]);
@@ -61,6 +69,7 @@ const NewCardForm: React.FC<PropsInterface> = ({ onCancel, onAdd }) => {
       handleSubmit={handleSubmit}
       onCancel={onCancel}
       loading={loading}
+      error={inputError}
     />
   );
 };

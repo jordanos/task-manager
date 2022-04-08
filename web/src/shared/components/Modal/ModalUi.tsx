@@ -1,6 +1,6 @@
 import React from 'react';
 import { zIndexValues } from 'shared/utils/Styles';
-import StyledContainer from './Styles';
+import StyledModal from './Styles';
 
 interface Props {
   toggleView: Function;
@@ -11,7 +11,7 @@ const ModalUi: React.FC<Props> = ({ modal, toggleView, children }) => {
   return (
     <>
       {/* modal background */}
-      <StyledContainer
+      <StyledModal
         className="modal-bg"
         active={modal.active}
         onClick={() => toggleView()}

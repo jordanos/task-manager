@@ -69,6 +69,7 @@ export const zIndexValues = {
   dropdown: 101,
   sidebar: 5,
   navHeader: 2,
+  loading: 2000,
 };
 
 export const font = {

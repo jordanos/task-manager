@@ -17,17 +17,17 @@ interface Props {
 const CustomCard: React.FC<Props> = (props) => {
   const { onEdit, onClick, onDelete, task } = props;
 
-  const { loading, error, data, mutate } = useMutate(
-    'delete',
-    `${HOST}/tasks/${task.id}`
-  );
+  const { loading, error, data, mutate } = useMutate('delete', ``);
 
   const handleDelete = () => {
-    mutate({
-      ...task,
-      assignedTo: '622de5fed3f42ebf99d1b5de',
-      date: task.date.toString(),
-    });
+    mutate(
+      {
+        ...task,
+        assignedTo: '622de5fed3f42ebf99d1b5de',
+        date: task.date.toString(),
+      },
+      `${HOST}/tasks/${task.id}`
+    );
   };
 
   useEffect(() => {

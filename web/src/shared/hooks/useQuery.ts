@@ -33,7 +33,7 @@ const useQuery = (
         setData(res.data.data);
       } catch (e: any) {
         setLoading(false);
-        setError(e);
+        setError(e.error);
       }
     };
 
