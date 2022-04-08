@@ -27,12 +27,17 @@ const useMutate = (
           Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA0OGRkYTc1MzU1ZGYwZTU5ZWU1ZSIsImlhdCI6MTY0OTM0OTI4NCwiZXhwIjoyNTEzMjYyODg0fQ.IHh7sgSYoqVeaqRAVgm7O-_ZRiITacBQyGCMmWn0mCI`,
         },
       });
-      if (res.status >= 400) throw new Error(res.error);
       setLoading(false);
       setData(res.data.data);
     } catch (e: any) {
       setLoading(false);
-      setError(e);
+      if (e.response) {
+        setError(e.response.data.error);
+      } else if (e.request) {
+        setError(e.request);
+      } else {
+        setError(e.message);
+      }
     }
   };
 
