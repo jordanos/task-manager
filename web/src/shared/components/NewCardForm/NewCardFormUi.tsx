@@ -29,7 +29,7 @@ const NewCardFormUi: React.FC<Props> = (props) => {
       }}>
       <StyledWrapper className="form-row">
         <TextInput
-          placeholer="new task"
+          placeholder="new task"
           name="title"
           type="text"
           value={task.title}
@@ -40,7 +40,7 @@ const NewCardFormUi: React.FC<Props> = (props) => {
       </StyledWrapper>
       <StyledWrapper className="form-row">
         <TextArea
-          placeholer="my new task"
+          placeholder="my new task"
           name="description"
           value={task.description}
           onChange={updateTask}

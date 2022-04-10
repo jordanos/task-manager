@@ -1,20 +1,22 @@
 import axios from 'axios';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { getLocalToken } from 'shared/helpers/auth';
+import { getError } from 'shared/helpers/ntw';
+import useNtwStates from './useNtwStates';
 
-type ReqReturn = {
+export interface ReqReturn {
   loading: boolean;
-  error: { error: string } | null;
+  error: { error: any; id: string };
   data: any | null;
-};
+}
 
 const useQuery = (
   method: 'get' | 'post' | 'put' | 'delete',
   url: string,
   reqData: any = null
 ): ReqReturn => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+  const { loading, setLoading, error, setError, data, setData } =
+    useNtwStates();
 
   useEffect(() => {
     const execute = async () => {
@@ -25,15 +27,14 @@ const useQuery = (
           url,
           data: reqData,
           headers: {
-            Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA0OGRkYTc1MzU1ZGYwZTU5ZWU1ZSIsImlhdCI6MTY0OTM0OTI4NCwiZXhwIjoyNTEzMjYyODg0fQ.IHh7sgSYoqVeaqRAVgm7O-_ZRiITacBQyGCMmWn0mCI`,
+            Authorization: getLocalToken(),
           },
         });
-        if (res.status >= 400) throw new Error(res.error);
         setLoading(false);
         setData(res.data.data);
       } catch (e: any) {
         setLoading(false);
-        setError(e.error);
+        setError(getError(e));
       }
     };
 

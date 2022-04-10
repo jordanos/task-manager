@@ -4,6 +4,7 @@ import DashboardIcon from 'shared/assets/icons/DashboardIcon';
 /* eslint-disable @typescript-eslint/default-param-last */
 type ModalType = {
   active: boolean;
+  modalType: 'edit' | 'auth';
 };
 
 export type NavHeader = {
@@ -12,7 +13,7 @@ export type NavHeader = {
 };
 
 export type NtwState = {
-  error: any;
+  error: { error: any; id: string };
   loading: boolean;
 };
 
@@ -25,13 +26,14 @@ interface AppState {
 const initialState: AppState = {
   modal: {
     active: false,
+    modalType: 'edit',
   },
   navHeader: {
     title: '',
     icon: DashboardIcon,
   },
   ntwState: {
-    error: null,
+    error: { error: null, id: '' },
     loading: false,
   },
 };

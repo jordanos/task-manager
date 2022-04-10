@@ -2,6 +2,7 @@ import { mixin } from 'shared/utils/Styles';
 import styled from 'styled-components';
 
 interface Props {
+  outline?: boolean;
   bg?: string;
   color?: string;
   radius?: string;
@@ -10,8 +11,9 @@ interface Props {
 
 const StyledButton = styled.button<Props>`
   max-height: 2em;
-  background: ${(props) => props.bg};
+  background: ${(props) => !props.outline && props.bg};
   color: ${(props) => props.color};
+  border: solid 1px ${(props) => (props.outline ? props.color : 'transparent')};
   border-radius: ${(props) => props.radius};
   display: flex;
   justify-content: center;
