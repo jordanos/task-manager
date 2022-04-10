@@ -62,6 +62,8 @@ function taskReducer(
           return task.id !== action.payload.id;
         }),
       };
+    case 'DELETE_ALL_TASK':
+      return { ...state, tasks: initialState.tasks };
     default:
       return state;
   }

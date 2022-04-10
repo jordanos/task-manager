@@ -13,7 +13,7 @@ export type NavHeader = {
 };
 
 export type NtwState = {
-  error: any;
+  error: { error: any; id: string };
   loading: boolean;
 };
 
@@ -33,7 +33,7 @@ const initialState: AppState = {
     icon: DashboardIcon,
   },
   ntwState: {
-    error: null,
+    error: { error: null, id: '' },
     loading: false,
   },
 };

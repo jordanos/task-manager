@@ -44,8 +44,6 @@ export const StyledButton = styled.button`
   padding: 10px 2px;
 `;
 
-export default StyledForm;
-
 StyledInput.defaultProps = {
   width: '300px',
   height: '32px',
@@ -55,3 +53,5 @@ StyledArea.defaultProps = {
   width: '300px',
   height: '80px',
 };
+
+export default StyledForm;

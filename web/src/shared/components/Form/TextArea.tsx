@@ -7,7 +7,7 @@ interface Props {
   name: string;
 
   error?: null | string;
-  placeholer?: string;
+  placeholder?: string;
 
   value?: string;
   onChange: Function;
@@ -16,7 +16,7 @@ interface Props {
 const TextArea: React.FC<Props> = ({
   name,
   error,
-  placeholer,
+  placeholder,
   value,
   onChange,
   children,
@@ -33,7 +33,7 @@ const TextArea: React.FC<Props> = ({
         name={name}
         value={value}
         onChange={(e) => onChange(name, e.target.value)}
-        placeholder={placeholer}
+        placeholder={placeholder}
         rows={20}
       />
       {error && <div style={{ color: 'red', fontSize: '12px' }}>{error}</div>}
@@ -43,7 +43,7 @@ const TextArea: React.FC<Props> = ({
 
 TextArea.defaultProps = {
   error: null,
-  placeholer: 'Placeholder',
+  placeholder: 'Placeholder',
   value: '',
 };
 

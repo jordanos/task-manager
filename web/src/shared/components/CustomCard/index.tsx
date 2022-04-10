@@ -41,7 +41,7 @@ const CustomCard: React.FC<Props> = (props) => {
       {task && (
         <CustomCardUi
           onEdit={onEdit}
-          onDelete={handleDelete}
+          onDelete={onDelete ? handleDelete : onDelete}
           onClick={onClick}
           task={task}
           loading={loading}

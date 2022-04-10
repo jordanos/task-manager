@@ -1,20 +1,19 @@
 import axios from 'axios';
-import { useState } from 'react';
+import { getLocalToken } from 'shared/helpers/auth';
+import { getError } from 'shared/helpers/ntw';
+import useNtwStates from './useNtwStates';
+import { ReqReturn } from './useQuery';
 
-type MutateReturn = {
-  loading: boolean;
-  error: { error: string } | null;
-  data: any | null;
+interface MutateReturn extends ReqReturn {
   mutate: Function;
-};
+}
 
 const useMutate = (
   method: 'get' | 'post' | 'put' | 'delete',
   url: string
 ): MutateReturn => {
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
-  const [data, setData] = useState(null);
+  const { loading, setLoading, error, setError, data, setData } =
+    useNtwStates();
 
   const mutate = async (reqData: any, newUrl?: string) => {
     setLoading(true);
@@ -24,20 +23,14 @@ const useMutate = (
         url: newUrl || url,
         data: reqData,
         headers: {
-          Authorization: `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyMzA0OGRkYTc1MzU1ZGYwZTU5ZWU1ZSIsImlhdCI6MTY0OTM0OTI4NCwiZXhwIjoyNTEzMjYyODg0fQ.IHh7sgSYoqVeaqRAVgm7O-_ZRiITacBQyGCMmWn0mCI`,
+          Authorization: getLocalToken(),
         },
       });
       setLoading(false);
       setData(res.data.data);
     } catch (e: any) {
       setLoading(false);
-      if (e.response) {
-        setError(e.response.data.error);
-      } else if (e.request) {
-        setError(e.request);
-      } else {
-        setError(e.message);
-      }
+      setError(getError(e));
     }
   };
 

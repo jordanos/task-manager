@@ -7,7 +7,7 @@ interface InputInterface {
   name: string;
   type: string;
   error?: null | string;
-  placeholer?: string;
+  placeholder?: string;
   width?: string;
   value?: any;
   onChange: Function;
@@ -17,7 +17,7 @@ const TextInput: React.FC<InputInterface> = ({
   name,
   type,
   error,
-  placeholer,
+  placeholder,
   width,
   value,
   onChange,
@@ -36,7 +36,7 @@ const TextInput: React.FC<InputInterface> = ({
         value={value}
         onChange={(e) => onChange(name, e.target.value)}
         width={width}
-        placeholder={placeholer}
+        placeholder={placeholder}
       />
       {error !== '' && (
         <div style={{ color: 'red', fontSize: '12px' }}>{error}</div>
@@ -47,7 +47,7 @@ const TextInput: React.FC<InputInterface> = ({
 
 TextInput.defaultProps = {
   error: null,
-  placeholer: 'Placeholder',
+  placeholder: 'Placeholder',
   width: '300px',
   value: '',
 };

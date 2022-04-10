@@ -4,9 +4,15 @@ import Dashboard from 'pages/dashboard';
 import Events from 'pages/events';
 import Tasks from 'pages/tasks';
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Navigate,
+  Route,
+  Routes,
+} from 'react-router-dom';
 import 'react-toastify/dist/ReactToastify.css';
 import Navigation from 'shared/components/Navigation';
+import ProtectedRoute from './ProtectedRoute';
 
 const AppRoutes: React.FC = () => {
   return (
@@ -14,11 +20,16 @@ const AppRoutes: React.FC = () => {
       <Navigation />
 
       <Routes>
-        <Route path="/events" element={<Events />} />
-        <Route path="/tasks" element={<Tasks />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<Dashboard />} />
+
+        <Route element={<ProtectedRoute />}>
+          <Route path="/dashboard" element={<Dashboard />} />
+          <Route path="/events" element={<Events />} />
+          <Route path="/tasks" element={<Tasks />} />
+        </Route>
+
+        <Route path="*" element={<Navigate to="/dashboard" replace />} />
       </Routes>
     </Router>
   );

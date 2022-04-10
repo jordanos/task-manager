@@ -31,7 +31,7 @@ const EditTaskUi: React.FC<Props> = (props) => {
       onSubmit={handleSubmit}>
       <StyledWrapper className="form-row" align="start">
         <TextInput
-          placeholer="new task"
+          placeholder="new task"
           name="title"
           value={task.title}
           onChange={updateData}
@@ -42,7 +42,7 @@ const EditTaskUi: React.FC<Props> = (props) => {
       </StyledWrapper>
       <StyledWrapper align="start" className="form-row">
         <TextArea
-          placeholer="my new task"
+          placeholder="my new task"
           name="description"
           value={task.description}
           onChange={updateData}
