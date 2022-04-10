@@ -1,4 +1,5 @@
 const CustomError = require("../utils/CustomError");
+const { validateId } = require("../utils/validators");
 
 class BaseTemplate {
   constructor(req, res, next, model, modelName) {
@@ -77,6 +78,8 @@ exports.GetOne = class GetOne extends BaseTemplate {
 
   async doMongo() {
     const id = this.req.params.id;
+    validateId(id);
+
     this.doc = await this.model.findById(id);
   }
 
@@ -100,6 +103,8 @@ exports.UpdateOne = class UpdateOne extends BaseTemplate {
     this.validate(this.req);
 
     const id = this.req.params.id;
+    validateId(id);
+
     this.filter = { _id: id };
     const update = this.req.body;
     this.doc = await this.model.findOneAndUpdate(this.filter, update, {
@@ -125,6 +130,8 @@ exports.DeleteOne = class DeleteOne extends BaseTemplate {
 
   async doMongo() {
     const id = this.req.params.id;
+    validateId(id);
+
     this.filter = { _id: id };
     this.doc = await this.model.deleteOne(this.filter);
   }

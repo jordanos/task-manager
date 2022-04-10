@@ -12,11 +12,15 @@ const taskSchema = Joi.object({
   description: Joi.string().required(),
   date: Joi.date().required(),
   status: Joi.string().required(),
-  assignedTo: Joi.string().required(),
+  assignedTo: Joi.string().hex().length(24).required(),
 });
 
 const adminSchema = Joi.object({
   owner: Joi.string().required(),
+});
+
+const idSchema = Joi.object({
+  id: Joi.string().hex().length(24).required(),
 });
 
 // schema options
@@ -42,6 +46,13 @@ exports.validateTaskInput = (req) => {
 
 exports.validateAdminInput = (req) => {
   const { error, value } = adminSchema.validate(req.body, options);
+  if (error) {
+    throw new CustomError(error.message, 400);
+  }
+};
+
+exports.validateId = (id) => {
+  const { error, value } = idSchema.validate({ id }, options);
   if (error) {
     throw new CustomError(error.message, 400);
   }
