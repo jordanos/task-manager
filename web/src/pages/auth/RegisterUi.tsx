@@ -86,7 +86,7 @@ const RegisterUi: React.FC<Props> = (props) => {
               margin: '1em 0',
             }}
             className="form-row">
-            <Link to="/register">Already have an acount? Login</Link>
+            <Link to="/login">Already have an acount? Login</Link>
           </div>
         </Form>
       </StyledAuth>
