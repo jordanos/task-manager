@@ -60,7 +60,7 @@ const RegisterUi: React.FC<Props> = (props) => {
               error={error.password}
               value={data.password}
               onChange={updateData}
-              placeholder="123456">
+              placeholder="">
               Password
             </TextInput>
           </div>

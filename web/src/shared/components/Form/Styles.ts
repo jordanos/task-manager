@@ -17,7 +17,8 @@ export const StyledInput = styled.input<InputInterface>`
   height: ${(props) => props.height};
   background: white;
   border: 1px solid #c1ccdd;
-  border-radius: 2px;
+  border-radius: 5px;
+  padding: 1em 0.5em;
 `;
 
 export const StyledArea = styled.textarea<InputInterface>`

@@ -32,6 +32,7 @@ const TextInput: React.FC<InputInterface> = ({
       </label>
       <StyledInput
         id={name}
+        type={type}
         name={name}
         value={value}
         onChange={(e) => onChange(name, e.target.value)}
